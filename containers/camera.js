@@ -10,9 +10,14 @@ import {
   TouchableHighlight
 } from 'react-native';
 import Camera from 'react-native-camera';
+import { setVideo } from '../actions/submission.js';
+
 
 class CameraComponent extends Component {
+
+
   render() {
+
     return (
       <View style={styles.container}>
         <Camera
@@ -22,7 +27,7 @@ class CameraComponent extends Component {
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
           captureMode={Camera.constants.CaptureMode.video}
-          captureTarget={Camera.constants.CaptureTarget.cameraRoll}>
+          captureTarget={Camera.constants.CaptureTarget.disk}>
           <Text style={styles.capture} onPress={this.startVideo.bind(this)}>[CAPTURE]</Text>
           <Text style={styles.capture} onPress={this.stopVideo.bind(this)}>[STOP]</Text>          
         </Camera>
@@ -32,7 +37,13 @@ class CameraComponent extends Component {
 
   startVideo() {
     this.camera.capture()
-      .then((data) => console.log(data))
+      .then(
+        (data) => {
+          let videoTest=data.path;
+          this.props.setVideo(videoTest);
+          Actions.challenges();
+        }
+      )
       .catch(err => console.error(err));
   }
 
@@ -67,8 +78,8 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // loginAction: (user, pass) => dispatch(loginAction(user, pass)),
+  setVideo: (videoPath) => dispatch(setVideo(videoPath))
 });
 
-export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(CameraComponent);
+export default connect(({routes, submission})=>({routes, submission}), mapDispatchToProps)(CameraComponent);
 
