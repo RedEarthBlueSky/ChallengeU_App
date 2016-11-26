@@ -2,39 +2,41 @@ import { AsyncStorage } from 'react-native';
 
 const auth = (
   state = {
-    username: '',
+    fbToken: '',
     authToken: '',
-    role: '',
+    fbId: '',
+    username: '',
+    email: '',
     statusError: ''
   },
   action
 ) => {
   switch (action.type) {
   case 'LOGIN_SUCCESS': {
-    if (action.response.status === 'Authorized') {
+    if (action.response.authToken) {
       let idString = JSON.stringify({
+        fbToken: action.response.fbToken,
         authToken: action.response.idToken,
-        role: action.response.clearance,
-        username: action.response.username
+        fbId: action.response.fbId,
+        username: action.response.username,
+        email: action.response.email,
+        statusError: ''
       });
       AsyncStorage.setItem('idData', idString)
         .then(() => {console.log('Stored idData');})
         .catch(() => {console.log('Problem storing idData');});
-      return Object.assign({}, state, {
-        authToken: action.response.idToken,
-        role: action.response.clearance,
-        username: action.response.username,
-        statusError: ''
-      });
+      return Object.assign({}, state, idString);
     } else {
       return Object.assign({}, state, {
-        statusError: 'Wrong username or password.'
+        statusError: action.response.error
       });
     }
   }
   case 'LOGIN_FAILURE':
+    let error = 'Unknown error';
+    if (action.response.error) error = action.response.error;
     return Object.assign({}, state, {
-      statusError: 'Wrong username or password.'
+      statusError: error
     });
   case 'LOGIN_REQUEST':
     return Object.assign({}, state, {
@@ -42,9 +44,11 @@ const auth = (
     });
   case 'SET_IDDATA':
     return Object.assign({}, state, {
-      authToken: action.tokenId,
+      fbToken: action.fbToken,
+      authToken: action.authToken,
+      fbId: action.fbId,
       username: action.username,
-      role: action.role
+      email: action.email
     });
   default:
     return state;

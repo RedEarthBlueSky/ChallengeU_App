@@ -42,6 +42,7 @@ class Login extends Component {
         if (data.accessToken) {
           // We are already logged
           alert('Already logged!');
+          console.log(data);
           // lets move to main
           Actions.main();
         }
