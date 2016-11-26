@@ -21,7 +21,7 @@ const store = composeWithDevTools(
 const scenes = Actions.create(
     <Scene key="root">
       <Scene key="main" component={MainSceneComponent} type={ActionConst.REPLACE} title="Main"  />
-      <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Log in" initial={true}/>
+      <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Sign in with Facebook" initial={true}/>
     </Scene>
 );
 
