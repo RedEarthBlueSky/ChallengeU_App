@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import React, { Component, PropTypes } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
   View,
+  Text,
+  TextInput,
+  Button,
+  Alert,
+  ToastAndroid,
+  AsyncStorage,
+  StyleSheet,
+  StatusBar,
+  ScrollView,
   Dimensions
 } from 'react-native';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 const FBSDK = require('react-native-fbsdk');
 const {
@@ -15,39 +21,9 @@ const {
   AccessToken
 } = FBSDK;
 
-import { loginAction } from '../actions/login.js';
-
-class Login extends Component {
-
-  constructor(props) {
-    super(props);
-    this.onLogIn = onLogIn.bind(this);
-    // checkLogin();
-  }
-
-  componentWillReceiveProps (nextProps) {
-    // // Example of who to detect state changes
-    // if (this.props.token !== nextProps.token && nextProps.token !== '') {
-    //   Actions.main();
-    // }
-  }
-
-  // checkLogin() {
-  //
-  // }
+export default class MainSceneComponent extends Component {
 
   render() {
-    AccessToken.getCurrentAccessToken().then(
-      (data) => {
-        if (data.accessToken) {
-          // We are already logged
-          alert('Already logged!');
-          // lets move to main
-          Actions.main();
-        }
-
-      }
-    );
     return (
       <View style={styles.login}>
         <LoginButton
@@ -73,12 +49,8 @@ class Login extends Component {
           onLogoutFinished={() => alert("logout.")}/>
       </View>
     );
-  }
-}
+  };
 
-function onLogIn (token) {
-  // this.props.loginAction(this.state._username,this.state._password);
-  console.log(token);
 }
 
 const styles = StyleSheet.create({
@@ -105,11 +77,3 @@ const styles = StyleSheet.create({
     bottom: 100
   }
 });
-
-const mapDispatchToProps = (dispatch) => ({
-  // loginAction: (user, pass) => dispatch(loginAction(user, pass)),
-});
-
-export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(Login);
-
-// AppRegistry.registerComponent('ChallengeU', () => ChallengeU);

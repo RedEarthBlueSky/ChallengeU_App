@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-// import routes from './routes.js';
+import routes from './routes.js';
 import login from './login.js';
 // ... other reducers
 
 export default combineReducers({
-  // routes,
+  routes,
   login,
   // ... other reducers
 });
