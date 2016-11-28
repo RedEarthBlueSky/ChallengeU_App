@@ -9,10 +9,10 @@ import {
   Dimensions,
   TouchableHighlight
 } from 'react-native';
-import Video from 'react-native-video';
+import VideoComponent from 'react-native-video';
 
 
-class Challenges extends Component {
+class Video extends Component {
 
   constructor(props) {
     super(props);
@@ -83,4 +83,4 @@ const mapDispatchToProps = (dispatch) => ({
   // loginAction: (user, pass) => dispatch(loginAction(user, pass)),
 });
 
-export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(Challenges);
+export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(VideoComponent);

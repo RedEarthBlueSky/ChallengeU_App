@@ -57,7 +57,7 @@ class Login extends Component {
         </Text>
         <View style={styles.login}>
           <LoginButton 
-            publishPermissions={["publish_actions"]}
+            publishPermissions={["publish_actions", "user_friends"]}
             class = "login"
             onLoginFinished={
               (error, result) => {

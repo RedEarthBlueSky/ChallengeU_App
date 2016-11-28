@@ -10,7 +10,8 @@ import apiClientService from '../middlewares/apiClient.js';
 import MainSceneComponent from './main.js';
 import Login from './login.js';
 import CameraComponent from './camera.js';
-import Challenges from './video.js';
+import VideoComponent from './video.js';
+import SelectFriends from './selectfriends.js';
 
 const RouterWithRedux = connect()(Router);
 
@@ -25,7 +26,8 @@ const scenes = Actions.create(
       <Scene key="main" component={MainSceneComponent} type={ActionConst.REPLACE} title="Main" />
       <Scene key="camera" component={CameraComponent} type={ActionConst.REPLACE} title="Camera!" hideNavBar="true" />
       <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Sign in with Facebook" />
-      <Scene key="challenges" component={Challenges} type={ActionConst.REPLACE} title="Challenges" initial={true}/>
+      <Scene key="video" component={VideoComponent} type={ActionConst.REPLACE} title="Challenges" />
+      <Scene key="select" component={SelectFriends} type={ActionConst.REPLACE} title="Challenges" initial={true}/>
     </Scene>
 );
 
