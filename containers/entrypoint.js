@@ -23,7 +23,7 @@ const scenes = Actions.create(
     <Scene key="root">
       <Scene key="loader" hideNavBar="true" component={Loader} type={ActionConst.REPLACE} title="Ready for challenge?" initial={true} />
       <Scene key="main" component={MainSceneComponent} type={ActionConst.REPLACE} title="Main"  />
-      <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Log in" />
+      <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Sign in with Facebook" />
     </Scene>
 );
 
