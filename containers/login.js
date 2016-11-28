@@ -49,28 +49,35 @@ class Login extends Component {
       }
     );
     return (
-      <View style={styles.login}>
-        <LoginButton
-          publishPermissions={["publish_actions"]}
-          class = "login"
-          onLoginFinished={
-            (error, result) => {
-              if (error) {
-                console.log("login has error: " + result.error);
-              } else if (result.isCancelled) {
-                console.log("login is cancelled.");
-              } else {
-                AccessToken.getCurrentAccessToken().then(
-                  (data) => {
-                    console.log('FB Data: ' + JSON.stringify(data));
-                    console.log(data.accessToken.toString());
-                    onLogin(data.accessToken.toString());
-                  }
-                )
+      <View style={styles.container}>
+        <Text style = {{fontSize: 20, fontWeight: 'bold', textAlign: 'left'}}> Permissions </Text>
+        <Text style = {{fontSize: 16, paddingTop: 7, paddingLeft: 6, paddingRight: 8, lineHeight: 30}}> 
+        In order to submit a video or challenge your friends you have to sign in with Facebook. 
+        We need some information to identify you and the list of friends so you can challenge them.
+        </Text>
+        <View style={styles.login}>
+          <LoginButton 
+            publishPermissions={["publish_actions"]}
+            class = "login"
+            onLoginFinished={
+              (error, result) => {
+                if (error) {
+                  console.log("login has error: " + result.error);
+                } else if (result.isCancelled) {
+                  console.log("login is cancelled.");
+                } else {
+                  AccessToken.getCurrentAccessToken().then(
+                    (data) => {
+                      console.log('FB Data: ' + JSON.stringify(data));
+                      console.log(data.accessToken.toString());
+                      onLogin(data.accessToken.toString());
+                    }
+                  )
+                }
               }
             }
-          }
-          onLogoutFinished={() => alert("logout.")}/>
+            onLogoutFinished={() => alert("logout.")}/>
+        </View>
       </View>
     );
   }
@@ -85,25 +92,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  login: {
-    position: 'absolute',
-    width: Dimensions.get('window').width,
-    justifyContent: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: 'white',
     bottom: 100
+  },
+
+  login: {
+    paddingTop: 40,
+    paddingLeft: 5
   }
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
