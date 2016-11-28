@@ -26,12 +26,19 @@ class Loader extends Component {
     AsyncStorage.getItem('idData').then((value) => {
       if (value && value !== '') {
         let idObj = JSON.parse(value);
-        // this.props.setIdData('',idObj.username, idObj.role); // Dirty but forces showing elements after login
-        // fbToken, authToken, fbId, username, email
-        this.props.setIdData(idObj.fbToken,idObj.authToken, idObj.fbId, idObj.username, idObj.email);
-        // AsyncStorage.removeItem('idData'); // Temporal way to log out
-        // console.log(idObj);
-        goToMain();
+        // TODO: Api call /me to check if it is right
+        // if there is a problem delete asyncstorage and relogin
+        // AsyncStorage.removeItem('idData');
+        // this.props.setIdData(
+        //   idObj.fbToken,
+        //   idObj.authToken,
+        //   idObj.fbId,
+        //   idObj.firstName,
+        //   idObj.lastName,
+        //   idObj.picture,
+        //   idObj.email
+        // );
+        // goToMain(); now it is done at the componentWillReceiveProps
       }
       else {
         goToLogin();
@@ -40,6 +47,16 @@ class Loader extends Component {
       // Just in case log in again
       goToLogin();
     });
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.auth.authToken !== nextProps.auth.authToken && nextProps.auth.authToken !== '') {
+      goToMain();
+    }
+    if (this.props.auth.statusError !== nextProps.auth.statusError && nextProps.auth.statusError !== '') {
+      goToLogin();
+    }
+
   }
 
   render() {
@@ -89,7 +106,8 @@ const goToLogin = () => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setIdData: (fbToken, authToken, fbId, username, email) => dispatch(setIdData(fbToken, authToken, fbId, username, email)),
+  setIdData: (fbToken, authToken, fbId, firstName, lastName, picture, email) =>
+    dispatch(setIdData(fbToken, authToken, fbId, firstName, lastName, picture, email)),
 });
 
 export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(Loader);

@@ -7,19 +7,22 @@ const auth = (
     fbId: '',
     username: '',
     email: '',
+    picture: '',
     statusError: ''
   },
   action
 ) => {
   switch (action.type) {
-  case 'LOGIN_SUCCESS': {
-    if (action.response.authToken) {
+  case 'FB_TOKEN_LOGIN_SUCCESS': {
+    if (action.response.fbToken) {
       let idString = JSON.stringify({
         fbToken: action.response.fbToken,
-        authToken: action.response.idToken,
-        fbId: action.response.fbId,
-        username: action.response.username,
-        email: action.response.email,
+        authToken: action.response.authToken,
+        fbId: action.response.profileInfo.fbId,
+        firstName: action.response.profileInfo.firstName,
+        lastName: action.response.profileInfo.lastName,
+        email: action.response.profileInfo.email,
+        picture: action.response.profileInfo.picture,
         statusError: ''
       });
       AsyncStorage.setItem('idData', idString)
@@ -28,17 +31,54 @@ const auth = (
       return Object.assign({}, state, idString);
     } else {
       return Object.assign({}, state, {
+        fbToken: '',
+        authToken: '',
         statusError: action.response.error
       });
     }
   }
-  case 'LOGIN_FAILURE':
+  case 'FB_TOKEN_LOGIN_FAILURE':
     let error = 'Unknown error';
     if (action.response.error) error = action.response.error;
     return Object.assign({}, state, {
+      fbToken: '',
+      authToken: '',
       statusError: error
     });
-  case 'LOGIN_REQUEST':
+  case 'FB_TOKEN_LOGIN_REQUEST':
+    return Object.assign({}, state, {
+      statusError: '' // we clear the status error in case multiple wrong logins
+    });
+  case 'SELF_TOKEN_LOGIN_SUCCESS': {
+    if (action.response.fbToken) {
+      let idString = JSON.stringify({
+        fbToken: action.response.fbToken,
+        authToken: action.response.authToken,
+        fbId: action.response.profileInfo.fbId,
+        firstName: action.response.profileInfo.firstName,
+        lastName: action.response.profileInfo.lastName,
+        email: action.response.profileInfo.email,
+        picture: action.response.profileInfo.picture,
+        statusError: ''
+      });
+      return Object.assign({}, state, idString);
+    } else {
+      return Object.assign({}, state, {
+        fbToken: '',
+        authToken: '',
+        statusError: action.response.error
+      });
+    }
+  }
+  case 'SELF_TOKEN_LOGIN_FAILURE':
+    let error = 'Unknown error';
+    if (action.response.error) error = action.response.error;
+    return Object.assign({}, state, {
+      fbToken: '',
+      authToken: '',
+      statusError: error
+    });
+  case 'SELF_TOKEN_LOGIN_REQUEST':
     return Object.assign({}, state, {
       statusError: '' // we clear the status error in case multiple wrong logins
     });
@@ -47,8 +87,10 @@ const auth = (
       fbToken: action.fbToken,
       authToken: action.authToken,
       fbId: action.fbId,
-      username: action.username,
-      email: action.email
+      email: action.email,
+      firstName: action.firstName,
+      lastName: action.lastName,
+      picture: action.picture
     });
   default:
     return state;
