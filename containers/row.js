@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Switch } from 'react-native';
 
 
 const Row = (props) => (
   <View style={styles.container}>
+    <Switch/>
     <Text style={styles.text}>
       {`${props.name.first} ${props.name.last}`}
     </Text>

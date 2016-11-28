@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+
 import {
   AppRegistry,
   StyleSheet,
   Text,
+  Button,
+  Switch,
   ListView,
   View,
   Dimensions,
   TouchableHighlight
 } from 'react-native';
+
 import Row from './row.js';
+
+const onButtonPress = () => {
+  // do something;
+};
 
 class SelectFriends extends React.Component {
   constructor(props) {
@@ -41,15 +49,22 @@ class SelectFriends extends React.Component {
   render() {
     return (
       <View style = {styles.container}>
-      <Text style = {{fontSize: 16, paddingLeft: 6, paddingRight: 8, lineHeight: 30}}> 
+      <Text style = {{fontSize: 16, paddingLeft: 20}}> 
       Select the friends to challenge ({this.state.actual} left)
       </Text>
+
+      <View style = {styles.button}>
+      <Button
+          onPress={onButtonPress}
+          title="Submit"
+          accessibilityLabel="See an informative alert"
+        />
+      </View>
 
       <ListView
         dataSource={this.state.dataSource}
         renderRow={(data) => <Row {...data} />}
       />
-
 
       </View>
     );
@@ -59,8 +74,14 @@ class SelectFriends extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 60
+    marginTop: 70
   },
+  button: {
+    paddingTop: 20,
+    paddingLeft: 20,
+    height: 60,
+    width: 250
+  }
 
 });
 
