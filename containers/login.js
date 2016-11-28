@@ -22,12 +22,10 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.onLogIn = onLogIn.bind(this);
-    // checkLogin();
   }
 
   componentWillReceiveProps (nextProps) {
     if (this.props.auth.authToken !== nextProps.auth.authToken && nextProps.auth.authToken !== '') {
-      // Logged in and
       Actions.main();
     }
     if (this.props.auth.statusError !== nextProps.auth.statusError && nextProps.auth.statusError !== '') {
@@ -40,9 +38,9 @@ class Login extends Component {
     AccessToken.getCurrentAccessToken()
       .then(
         (data) => {
-          console.log(data);
           if (data && data.accessToken) {
             // We are already logged
+            console.log('Logged!')
             Actions.main();
           } else {
             console.log('data in non compliant format');
@@ -74,7 +72,7 @@ class Login extends Component {
                       (data) => {
                         console.log('FB Data: ' + JSON.stringify(data));
                         console.log(data.accessToken.toString());
-                        onLogin(data.accessToken.toString());
+                        onLogIn(data.accessToken.toString());
                       })
                     .catch((err) => {
                       console.log(err);
@@ -89,7 +87,7 @@ class Login extends Component {
   }
 }
 
-function onLogIn (token) {
+const onLogIn = (token) => {
   this.props.fbLoginAction(token);
   // In componentWillReceiveProps we check if response was OK or not
 }
@@ -112,7 +110,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fbLoginAction: (token) => dispatch(fbLoginAction(token)),
+  fbLoginAction: (token) => dispatch(fbLoginAction(token))
 });
 
 export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(Login);

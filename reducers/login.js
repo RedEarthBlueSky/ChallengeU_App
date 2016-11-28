@@ -71,12 +71,12 @@ const auth = (
     }
   }
   case 'SELF_TOKEN_LOGIN_FAILURE':
-    let error = 'Unknown error';
-    if (action.response.error) error = action.response.error;
+    let error2 = 'Unknown error';
+    if (action.response.error) error2 = action.response.error;
     return Object.assign({}, state, {
       fbToken: '',
       authToken: '',
-      statusError: error
+      statusError: error2
     });
   case 'SELF_TOKEN_LOGIN_REQUEST':
     return Object.assign({}, state, {

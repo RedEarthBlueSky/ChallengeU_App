@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 var Spinner = require('react-native-spinkit');
 
-import { setIdData } from '../actions/login.js';
+import { selfLoginAction } from '../actions/login.js';
 
 const SPINNER_TIME = 1500;
 
@@ -17,28 +17,15 @@ class Loader extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-
-    }
   }
 
   componentDidMount() {
     AsyncStorage.getItem('idData').then((value) => {
       if (value && value !== '') {
         let idObj = JSON.parse(value);
-        // TODO: Api call /me to check if it is right
         // if there is a problem delete asyncstorage and relogin
         // AsyncStorage.removeItem('idData');
-        // this.props.setIdData(
-        //   idObj.fbToken,
-        //   idObj.authToken,
-        //   idObj.fbId,
-        //   idObj.firstName,
-        //   idObj.lastName,
-        //   idObj.picture,
-        //   idObj.email
-        // );
-        // goToMain(); now it is done at the componentWillReceiveProps
+        selfLoginAction(idObj.authToken);
       }
       else {
         goToLogin();
@@ -50,10 +37,16 @@ class Loader extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.auth.authToken !== nextProps.auth.authToken && nextProps.auth.authToken !== '') {
+    if (this.props.auth &&
+      nextProps.auth &&
+      this.props.auth.authToken !== nextProps.auth.authToken &&
+      nextProps.auth.authToken !== '') {
       goToMain();
     }
-    if (this.props.auth.statusError !== nextProps.auth.statusError && nextProps.auth.statusError !== '') {
+    if (this.props.auth &&
+      nextProps.auth &&
+      this.props.auth.statusError !== nextProps.auth.statusError &&
+      nextProps.auth.statusError !== '') {
       goToLogin();
     }
 
@@ -69,7 +62,13 @@ class Loader extends Component {
         <Text style={styles.text}>
           Getting ready for challenge...
         </Text>
-        <Spinner style={styles.spinner} isVisible={isVisible} size={size} type={type} color={color}/>
+        <Spinner
+          style={styles.spinner}
+          isVisible={isVisible}
+          size={size}
+          type={type}
+          color={color}
+          />
       </View>
     );
   }
@@ -106,8 +105,9 @@ const goToLogin = () => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setIdData: (fbToken, authToken, fbId, firstName, lastName, picture, email) =>
-    dispatch(setIdData(fbToken, authToken, fbId, firstName, lastName, picture, email)),
+  selfLoginAction: (token) => dispatch(selfLoginAction(token))
 });
 
-export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(Loader);
+export default connect((
+  {routes, auth})=> ({routes, auth}), mapDispatchToProps
+)(Loader);
