@@ -1,17 +1,18 @@
 import { CALL_API } from '../middlewares/apiClient';
 
-export const loginAction = (username, password) => ({
+export const loginAction = (fbToken) => ({
   [CALL_API]: {
     type:'LOGIN',
     endpoint:'/login',
-    username,
-    password
+    fbToken
   }
 });
 
-export const setIdData = (tokenId, username, role) => ({
+export const setIdData = (fbToken, authToken, fbId, username, email) => ({
   type: 'SET_IDDATA',
-  tokenId,
+  fbToken,
+  authToken,
+  fbId,
   username,
-  role
+  email,
 });
