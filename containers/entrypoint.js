@@ -10,7 +10,7 @@ import apiClientService from '../middlewares/apiClient.js';
 import MainSceneComponent from './main.js';
 import Login from './login.js';
 import CameraComponent from './camera.js';
-import Challenges from './challenges.js';
+import Challenges from './video.js';
 
 const RouterWithRedux = connect()(Router);
 
