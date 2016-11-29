@@ -21,27 +21,17 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
-    this.onLogIn = onLogIn.bind(this);
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (this.props.auth.authToken !== nextProps.auth.authToken && nextProps.auth.authToken !== '') {
-      Actions.main();
+    // this.onLogIn = onLogIn.bind(this);
+    this.onLogIn = function (token) {
+      this.props.fbLoginAction(token);
+      // In componentWillReceiveProps we check if response was OK or not
     }
-    if (this.props.auth.statusError !== nextProps.auth.statusError && nextProps.auth.statusError !== '') {
-      // Logout from facebook?
-    }
-
-  }
-
-  render() {
     AccessToken.getCurrentAccessToken()
       .then(
         (data) => {
           if (data && data.accessToken) {
             // We are already logged
-            console.log('Logged!')
-            Actions.main();
+            this.onLogIn(data.accessToken);
           } else {
             console.log('data in non compliant format');
           }
@@ -49,6 +39,25 @@ class Login extends Component {
       .catch((err) => {
         console.log("Error accessing FB: ",err)
       });
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.auth &&
+      nextProps.auth &&
+      this.props.auth.authToken !== nextProps.auth.authToken &&
+      nextProps.auth.authToken !== '') {
+      Actions.main();
+    }
+    if (this.props.auth &&
+      nextProps.auth &&
+      this.props.auth.statusError !== nextProps.auth.statusError &&
+      nextProps.auth.statusError !== '') {
+      // Logout from facebook?
+    }
+
+  }
+
+  render() {
     return (
       <View style={styles.container}>
         <Text style = {{fontSize: 20, fontWeight: 'bold', textAlign: 'left'}}> Permissions </Text>
@@ -70,9 +79,7 @@ class Login extends Component {
                   AccessToken.getCurrentAccessToken()
                     .then(
                       (data) => {
-                        console.log('FB Data: ' + JSON.stringify(data));
-                        console.log(data.accessToken.toString());
-                        onLogIn(data.accessToken.toString());
+                        this.onLogIn(data.accessToken.toString());
                       })
                     .catch((err) => {
                       console.log(err);
@@ -85,11 +92,6 @@ class Login extends Component {
       </View>
     );
   }
-}
-
-const onLogIn = (token) => {
-  this.props.fbLoginAction(token);
-  // In componentWillReceiveProps we check if response was OK or not
 }
 
 const styles = StyleSheet.create({
