@@ -12,6 +12,7 @@ import Login from './login.js';
 import CameraComponent from './camera.js';
 import VideoComponent from './video.js';
 import SelectFriends from './selectfriends.js';
+import ChallengesScreen from './challengesscreen.js';
 
 const RouterWithRedux = connect()(Router);
 
@@ -27,7 +28,8 @@ const scenes = Actions.create(
       <Scene key="camera" component={CameraComponent} type={ActionConst.REPLACE} title="Camera!" hideNavBar="true" />
       <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Sign in with Facebook" />
       <Scene key="video" component={VideoComponent} type={ActionConst.REPLACE} title="Challenges" />
-      <Scene key="select" component={SelectFriends} type={ActionConst.REPLACE} title="Challenges" initial={true}/>
+      <Scene key="select" component={SelectFriends} type={ActionConst.REPLACE} title="Challenges" />
+      <Scene key="challengesScreen" component={ChallengesScreen} type={ActionConst.REPLACE} title="Challenges" initial={true}/>
     </Scene>
 );
 
