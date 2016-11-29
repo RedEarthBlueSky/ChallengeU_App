@@ -4,7 +4,6 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -39,7 +38,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReactMaterialKitPackage(),
             new ReactVideoPackage(),
             new RCTCameraPackage(),
             new FBSDKPackage(mCallbackManager)

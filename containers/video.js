@@ -21,13 +21,12 @@ class Video extends Component {
 
   render() {
     return (
-      <View style={styles.container}>      
-        <Video source={{uri: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"}}
+        <Video source={{uri: "http://techslides.com/demos/sample-videos/small.mp4"}}
          ref={(vid) => {
          this.vid = vid
          }}
-         width={300}
-         height={300}
+         width={400}
+         height={400}
          rate={1.0}
          volume={1.0}
          muted = {false}
@@ -43,7 +42,8 @@ class Video extends Component {
          onError={this.videoError}
          style={styles.backgroundVideo} />
         
-      </View>
+
+
     );
   }
 
