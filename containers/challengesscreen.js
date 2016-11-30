@@ -13,7 +13,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import Item from '../components/item.js'
+import Item from '../components/griditem.js'
 
 const styles = StyleSheet.create({
   container: {

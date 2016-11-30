@@ -14,6 +14,7 @@ import VideoComponent from './video.js';
 import SelectFriends from './selectfriends.js';
 import ChallengesScreen from './challengesscreen.js';
 import SpecificChallenge from './specificchallenge.js';
+import MySubmissions from './mysubmissions.js';
 
 const RouterWithRedux = connect()(Router);
 
@@ -31,7 +32,8 @@ const scenes = Actions.create(
       <Scene key="video" component={VideoComponent} type={ActionConst.REPLACE} title="Challenges" />
       <Scene key="select" component={SelectFriends} type={ActionConst.REPLACE} title="Challenges" />
       <Scene key="challengesScreen" component={ChallengesScreen} type={ActionConst.REPLACE} title="Challenges" />
-      <Scene key="SpecificChallenge" component={SpecificChallenge} type={ActionConst.REPLACE} title="The challenge" initial={true}/>
+      <Scene key="SpecificChallenge" component={SpecificChallenge} type={ActionConst.REPLACE} title="The challenge" />
+      <Scene key="MySubmissions" component={MySubmissions} type={ActionConst.REPLACE} title="My submissions" initial={true}/>
     </Scene>
 );
 
