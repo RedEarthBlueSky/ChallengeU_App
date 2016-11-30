@@ -99,12 +99,14 @@ class ChallengesScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.grid}>
-          <Item style={styles.gridFirst} pic={this.challengesList[0].pic} name={this.challengesList[0].name} />
-          {this.items()}
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.grid}>
+            <Item style={styles.gridFirst} pic={this.challengesList[0].pic} name={this.challengesList[0].name} />
+            {this.items()}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

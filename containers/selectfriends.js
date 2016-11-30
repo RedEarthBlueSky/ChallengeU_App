@@ -49,7 +49,6 @@ class SelectFriends extends React.Component {
   ]
 
   ds = new ListView.DataSource({rowHasChanged: (r1, r2) => {
-      console.log(r1, r2);
       return r1 !== r2
     }
   });

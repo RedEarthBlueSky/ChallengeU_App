@@ -22,11 +22,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const prova = () => {
-  console.log('pressed');
-  Actions.select();
-};
-
 const Item = (props) => (
   <View style={props.style}>
     <View style={styles.itemDesign}>
