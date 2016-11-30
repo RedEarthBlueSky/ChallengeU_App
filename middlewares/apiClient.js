@@ -2,19 +2,30 @@ const API_ROOT = require('../config.json').apiRoot;
 
 const callApi = (endpoint, method, headers, data) => {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
-
   return new Promise((resolve, reject) => {
     fetch(fullUrl, {
       method,
-      headers
+      headers,
+      body: JSON.stringify(data)
     })
     .then(response => {
       response.json()
       .then(json => {
-        if (Array.isArray(json)) return resolve([].concat(json));
-        if (!response.ok) return reject(json);
+        if (Array.isArray(json)) {
+          return resolve([].concat(json));
+        }
+        if (!response.ok) {
+          return reject(json);
+        }
         return resolve(Object.assign({}, json));
+      })
+      .catch((err) => {
+        console.log('Error @ json', err );
       });
+    })
+    .catch((err) => {
+      console.log('Error at middleware: ', err);
+      reject(err);
     });
   });
 };
@@ -35,6 +46,8 @@ export default store => next => action => {
   if (currentState.auth.authToken && currentState.auth.authToken !== '') {
     headers.append('Authorization', `Bearer ${currentState.auth.authToken}`);
   }
+
+  if (data) headers.append('content-type','application/json');
 
   if (typeof endpoint !== 'string') {
     throw new Error('Specify a string endpoint URL.');
@@ -64,6 +77,7 @@ export default store => next => action => {
       );
     },
     error => {
+      console.log('Error in middleware: ', err);
       next(
         actionWith(
           {
@@ -73,5 +87,8 @@ export default store => next => action => {
         )
       );
     }
-  );
+  )
+  .catch((err) => {
+    console.log('Error @ middleware: ', err);
+  });
 };

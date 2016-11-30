@@ -82,7 +82,7 @@ class Login extends Component {
                         this.onLogIn(data.accessToken.toString());
                       })
                     .catch((err) => {
-                      console.log(err);
+                      console.log('Error: ', JSON.stringify(err));
                     });
                 }
               }
