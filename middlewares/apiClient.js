@@ -9,6 +9,7 @@ const callApi = (endpoint, method, headers, data) => {
       body: JSON.stringify(data)
     })
     .then(response => {
+      console.log(response);
       response.json()
       .then(json => {
         if (Array.isArray(json)) {

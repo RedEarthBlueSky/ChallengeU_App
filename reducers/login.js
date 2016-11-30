@@ -5,7 +5,8 @@ const auth = (
     fbToken: '',
     authToken: '',
     fbId: '',
-    username: '',
+    firstName: '',
+    lastName: '',
     email: '',
     picture: '',
     statusError: ''

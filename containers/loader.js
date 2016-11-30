@@ -21,13 +21,14 @@ class Loader extends Component {
 
   componentDidMount() {
     // delete asyncstorage and relogin until
-    AsyncStorage.removeItem('idData');
+    // AsyncStorage.removeItem('idData');
     AsyncStorage.getItem('idData').then((value) => {
       if (value && value !== '') {
         let idObj = JSON.parse(value);
         // if there is a problem delete asyncstorage and relogin
         // AsyncStorage.removeItem('idData');
-        selfLoginAction(idObj.authToken);
+        console.log(this.props);
+        this.props.selfLoginAction(idObj.authToken);
       }
       else {
         goToLogin();
