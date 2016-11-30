@@ -21,12 +21,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold'
   },
-  photo: {
-    marginLeft: 12,
-    height: 30,
-    width: 30,
-    borderRadius: 20
-  },
   video: {
     marginTop: 15,
     height: 180,
@@ -37,19 +31,34 @@ const styles = StyleSheet.create({
 
 
 const Submission = (props) => {
-
   renderFriends = function () {
     return props.challengedUsers.map(function(user) {
       let actualState = user.status === 'Done' ? "has took it" : "haven't took it yet";
       return (
         <View style={styles.information}>
-          <Image source={{ uri: user.userPic}} style={styles.photo} />
+          <Image source={{ uri: user.userPic}} style={personalized(user.status)} />
           <Text style={styles.text1}>
             {`${user.userName} ${actualState}`}
           </Text>
         </View>
         )
     });
+  }
+
+  personalized = function(status) {
+    return {
+      marginLeft: 12,
+      height: 30,
+      width: 30,
+      borderRadius: 20,
+      borderColor: chooseColor(status),
+      borderWidth : 1.5
+    }
+  }
+
+  chooseColor = function(status) {
+    if (status === 'Done') return 'green';
+    else return 'red';
   }
 
   return (
