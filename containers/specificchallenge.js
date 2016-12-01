@@ -18,26 +18,19 @@ import Challenge from '../components/challenge.js';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
     marginTop: 60,
   },
-  description: {
-    fontSize: 17,
-    paddingLeft: 12,
-    paddingTop: 6,
-    paddingBottom: 10,
-    lineHeight: 30
-  },
-  button: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
-    height: 60,
-    width: 120
+  header: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 30
   }
 });
 
 const onButtonPress = () => {
-
+  //do something
 };
 
 class SpecificChallenge extends React.Component {
@@ -96,7 +89,7 @@ class SpecificChallenge extends React.Component {
       "captureURL": "https://theawesomer.com/photos/2012/09/160912_cinnamon_challenge_t.jpg"
     }
   ]
-  
+
 
   constructor(props) {
     super(props);
@@ -109,12 +102,14 @@ class SpecificChallenge extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.description}> {this.challengeList[0].description} </Text>
-        <View style={styles.button}>
-          <Button
-          onPress={onButtonPress}
-          title="Take it!"
-          />
+        <Text style={{fontSize: 17, fontWeight: 'bold', marginTop: 8}}> {this.challengeList[0].description} </Text>
+        <View style={styles.header}>
+          <View style={{height:60, width:120}}>
+            <Button
+            onPress={onButtonPress}
+            title="Take it!"
+            />
+          </View>
         </View>
         <ListView
           dataSource={this.state.dataSource}
