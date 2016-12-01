@@ -48,11 +48,11 @@ const Submission = (props) => {
   personalized = function(status) {
     return {
       marginLeft: 12,
-      height: 30,
-      width: 30,
+      height: 35,
+      width: 35,
       borderRadius: 20,
       borderColor: chooseColor(status),
-      borderWidth : 1.5
+      borderWidth : 2
     }
   }
 

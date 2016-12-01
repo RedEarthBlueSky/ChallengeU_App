@@ -27,6 +27,7 @@ class SpecificChallenge extends React.Component {
     {
       "id": "as7923ljksf9832iofwoi",
       "authorId": "s7sd6h87s78h6",
+      "userName": "Harold Vinolas",
       "pictureId": "https://randomuser.me/api/portraits/men/4.jpg",    
       "challengedUsers": [
         {
@@ -51,6 +52,7 @@ class SpecificChallenge extends React.Component {
     {
       "id": "as7923ljksf9832iofwoi",
       "authorId": "s7sd6h87s78h6",
+      "userName": "Henry Hass",
       "pictureId": "https://randomuser.me/api/portraits/men/4.jpg",
       "challengedUsers": [
         {
