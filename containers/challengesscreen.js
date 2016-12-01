@@ -97,11 +97,11 @@ class ChallengesScreen extends React.Component {
     return itemsList
   }
 
-  action = () => {
-    console.log('pressed!!!');
-    Actions.select()
+  action = (data) => {
+    console.log(data);
+    Actions.SpecificChallenge({title: 'Ice Bucket Challenge'})
   }
-  
+
   render() {
     return (
       <TouchableOpacity onPress={this.action}>
