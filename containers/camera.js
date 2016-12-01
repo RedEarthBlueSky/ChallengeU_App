@@ -50,7 +50,7 @@ class CameraComponent extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.isRecording !== nextProps.isRecording && nextProps.token !== '') {
+    if (nextProps.isRecording === false && nextProps.recordedFile !== '') {
       Actions.main();
     }
   }
