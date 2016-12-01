@@ -37,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
+      mCallbackManager = new CallbackManager.Factory().create(); // Added by Ruben
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new RNSpinkitPackage(),
