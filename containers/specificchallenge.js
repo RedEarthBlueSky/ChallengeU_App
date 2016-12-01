@@ -8,6 +8,7 @@ import {
   ListView,
   View,
   ScrollView,
+  Button,
   Dimensions,
   TouchableHighlight
 } from 'react-native';
@@ -19,7 +20,25 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 60,
   },
+  description: {
+    fontSize: 17,
+    paddingLeft: 12,
+    paddingTop: 6,
+    paddingBottom: 10,
+    lineHeight: 30
+  },
+  button: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    height: 60,
+    width: 120
+  }
 });
+
+const onButtonPress = () => {
+
+};
 
 class SpecificChallenge extends React.Component {
   challengeList = 
@@ -28,7 +47,8 @@ class SpecificChallenge extends React.Component {
       "id": "as7923ljksf9832iofwoi",
       "authorId": "s7sd6h87s78h6",
       "userName": "Harold Vinolas",
-      "pictureId": "https://randomuser.me/api/portraits/men/4.jpg",    
+      "pictureId": "https://randomuser.me/api/portraits/men/4.jpg",
+      "description": "Throw a bucket full of glasses into your head!",
       "challengedUsers": [
         {
           "userId": "k32j45l3kj5l32kj",
@@ -54,6 +74,7 @@ class SpecificChallenge extends React.Component {
       "authorId": "s7sd6h87s78h6",
       "userName": "Henry Hass",
       "pictureId": "https://randomuser.me/api/portraits/men/4.jpg",
+      "description": "Throw a bucket full of glasses into your head!",
       "challengedUsers": [
         {
           "userId": "k32j45l3kj5l32kj",
@@ -80,7 +101,6 @@ class SpecificChallenge extends React.Component {
   constructor(props) {
     super(props);
 
-
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(this.challengeList),
@@ -88,11 +108,19 @@ class SpecificChallenge extends React.Component {
   }
   render() {
     return (
-      <ListView
-        style={styles.container}
-        dataSource={this.state.dataSource}
-        renderRow={(data) => <Challenge {...data} />}
-      />
+      <View style={styles.container}>
+        <Text style={styles.description}> {this.challengeList[0].description} </Text>
+        <View style={styles.button}>
+          <Button
+          onPress={onButtonPress}
+          title="Take it!"
+          />
+        </View>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(data) => <Challenge {...data} />}
+        />
+      </View>
     );
   }
 }
