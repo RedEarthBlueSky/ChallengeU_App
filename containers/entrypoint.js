@@ -26,12 +26,12 @@ const store = composeWithDevTools(
 const scenes = Actions.create(
     <Scene key="root">
       <Scene key="main" component={MainSceneComponent} type={ActionConst.REPLACE} title="Main" />
-      <Scene key="camera" component={CameraComponent} type={ActionConst.REPLACE} title="Camera!" hideNavBar="true" />
+      <Scene key="camera" component={CameraComponent} type={ActionConst.REPLACE} title="Camera!" hideNavBar="true" initial={true}/>
       <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Sign in with Facebook" />
       <Scene key="video" component={VideoComponent} type={ActionConst.REPLACE} title="Challenges" />
       <Scene key="select" component={SelectFriends} type={ActionConst.REPLACE} title="Challenges" />
       <Scene key="challengesScreen" component={ChallengesScreen} type={ActionConst.REPLACE} title="Challenges" />
-      <Scene key="SpecificChallenge" component={SpecificChallenge} type={ActionConst.REPLACE} title="The challenge" initial={true}/>
+      <Scene key="SpecificChallenge" component={SpecificChallenge} type={ActionConst.REPLACE} title="The challenge" />
     </Scene>
 );
 
