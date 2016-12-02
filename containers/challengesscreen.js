@@ -10,10 +10,10 @@ import {
   View,
   ScrollView,
   Dimensions,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native';
 
-import Item from '../components/item.js'
+import Item from '../components/griditem.js'
 
 const styles = StyleSheet.create({
   container: {
@@ -97,16 +97,23 @@ class ChallengesScreen extends React.Component {
     return itemsList
   }
 
+  action = (data) => {
+    console.log(data);
+    Actions.SpecificChallenge({title: 'Ice Bucket Challenge'})
+  }
+
   render() {
     return (
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.grid}>
-            <Item style={styles.gridFirst} pic={this.challengesList[0].pic} name={this.challengesList[0].name} />
-            {this.items()}
+      <TouchableOpacity onPress={this.action}>
+        <ScrollView>
+          <View style={styles.container}>
+            <View style={styles.grid}>
+              <Item style={styles.gridFirst} pic={this.challengesList[0].pic} name={this.challengesList[0].name} />
+              {this.items()}
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </TouchableOpacity>
     );
   }
 }

@@ -21,9 +21,9 @@ class VideoComponent extends Component {
 
   render() {
     return (
-        <Video source={{uri: "http://techslides.com/demos/sample-videos/small.mp4"}}
+        <VideoComponent source={{uri: "http://techslides.com/demos/sample-videos/small.mp4"}}
          ref={(vid) => {
-         this.vid = vid
+           this.vid = vid
          }}
          width={400}
          height={400}
@@ -82,5 +82,6 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = (dispatch) => ({
   // loginAction: (user, pass) => dispatch(loginAction(user, pass)),
 });
+
 
 export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(VideoComponent);

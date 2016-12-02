@@ -86,9 +86,9 @@ class SelectFriends extends React.Component {
 
       <View style = {styles.button}>
       <Button
+          disabled={this.state.actual === 0 ? false : true}
           onPress={onButtonPress}
           title="Submit"
-          accessibilityLabel="See an informative alert"
         />
       </View>
 
