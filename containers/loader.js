@@ -40,16 +40,17 @@ class Loader extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.auth &&
-      nextProps.auth &&
-      this.props.auth.authToken !== nextProps.auth.authToken &&
-      nextProps.auth.authToken !== '') {
+    if (this.props.login &&
+      nextProps.login &&
+      this.props.login.authToken !== nextProps.login.authToken &&
+      nextProps.login.authToken !== '') {
+      console.log('gotoMain');
       goToMain();
     }
-    if (this.props.auth &&
-      nextProps.auth &&
-      this.props.auth.statusError !== nextProps.auth.statusError &&
-      nextProps.auth.statusError !== '') {
+    if (this.props.login &&
+      nextProps.login &&
+      this.props.login.statusError !== nextProps.login.statusError &&
+      nextProps.login.statusError !== '') {
       goToLogin();
     }
 
@@ -112,5 +113,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect((
-  {routes, auth})=> ({routes, auth}), mapDispatchToProps
+  {routes, login})=> ({routes, login}), mapDispatchToProps
 )(Loader);

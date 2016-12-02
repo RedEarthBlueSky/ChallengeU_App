@@ -44,8 +44,8 @@ export default store => next => action => {
   headers = headers || new Headers();
 
   let currentState = store.getState();
-  if (currentState.auth.authToken && currentState.auth.authToken !== '') {
-    headers.append('Authorization', `Bearer ${currentState.auth.authToken}`);
+  if (currentState.login.authToken && currentState.login.authToken !== '') {
+    headers.append('Authorization', `Bearer ${currentState.login.authToken}`);
   }
 
   if (data) headers.append('content-type','application/json');

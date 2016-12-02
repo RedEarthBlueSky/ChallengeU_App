@@ -9,7 +9,10 @@ import apiClientService from '../middlewares/apiClient.js';
 
 import MainSceneComponent from './main.js';
 import Login from './login.js';
+import CameraComponent from './camera.js';
+import Challenges from './challenges.js';
 import Loader from './loader.js';
+
 
 const RouterWithRedux = connect()(Router);
 
@@ -21,6 +24,8 @@ const store = composeWithDevTools(
 
 const scenes = Actions.create(
     <Scene key="root">
+      <Scene key="camera" component={CameraComponent} type={ActionConst.REPLACE} title="Camera!" hideNavBar="true" />
+      <Scene key="challenges" component={Challenges} type={ActionConst.REPLACE} title="Challenges" />
       <Scene key="loader" hideNavBar="true" component={Loader} type={ActionConst.REPLACE} title="Ready for challenge?" initial={true} />
       <Scene key="main" component={MainSceneComponent} type={ActionConst.REPLACE} title="Main"  />
       <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Sign in with Facebook" />

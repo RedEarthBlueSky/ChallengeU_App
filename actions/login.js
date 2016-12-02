@@ -10,7 +10,7 @@ export const fbLoginAction = (fbToken) => ({
 });
 
 export const selfLoginAction = (authToken) => {
-  console.log('selfLoginAction')
+  console.log('selfLoginAction', authToken)
   return {
     [CALL_API]: {
       method: 'POST',

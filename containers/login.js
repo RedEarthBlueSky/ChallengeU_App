@@ -19,16 +19,17 @@ import { fbLoginAction } from '../actions/login.js';
 
 class Login extends Component {
 
+  onLogin = (token) => {
+    this.props.fbLoginAction(token)
+  }
+
   constructor(props) {
     super(props);
-    // this.onLogIn = onLogIn.bind(this);
-    this.onLogIn = function (token) {
-      this.props.fbLoginAction(token);
-      // In componentWillReceiveProps we check if response was OK or not
-    }
+
     AccessToken.getCurrentAccessToken()
       .then(
         (data) => {
+          console.log(data);
           if (data && data.accessToken) {
             // We are already logged
             this.onLogIn(data.accessToken);
@@ -42,16 +43,17 @@ class Login extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.auth &&
-      nextProps.auth &&
-      this.props.auth.authToken !== nextProps.auth.authToken &&
-      nextProps.auth.authToken !== '') {
+    console.log('changes!')
+    if (this.props.login &&
+      nextProps.login &&
+      this.props.login.authToken !== nextProps.login.authToken &&
+      nextProps.login.authToken !== '') {
       Actions.main();
     }
-    if (this.props.auth &&
-      nextProps.auth &&
-      this.props.auth.statusError !== nextProps.auth.statusError &&
-      nextProps.auth.statusError !== '') {
+    if (this.props.login &&
+      nextProps.login &&
+      this.props.login.statusError !== nextProps.login.statusError &&
+      nextProps.login.statusError !== '') {
       // Logout from facebook?
     }
 
@@ -76,13 +78,14 @@ class Login extends Component {
                 } else if (result.isCancelled) {
                   console.log("login is cancelled.");
                 } else {
+                  const ctx = this;
                   AccessToken.getCurrentAccessToken()
                     .then(
                       (data) => {
-                        this.onLogIn(data.accessToken.toString());
+                        ctx.onLogin(data.accessToken.toString());
                       })
                     .catch((err) => {
-                      console.log('Error: ', JSON.stringify(err));
+                      console.log('Error reading fbtoken: ', err);
                     });
                 }
               }
@@ -115,4 +118,4 @@ const mapDispatchToProps = (dispatch) => ({
   fbLoginAction: (token) => dispatch(fbLoginAction(token))
 });
 
-export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(Login);
+export default connect(({routes, login})=>({routes, login}), mapDispatchToProps)(Login);
