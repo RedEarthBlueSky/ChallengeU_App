@@ -9,10 +9,10 @@ import {
   Dimensions,
   TouchableHighlight
 } from 'react-native';
-import VideoComponent from 'react-native-video';
+import Video from 'react-native-video';
 
 
-class Video extends Component {
+class VideoComponent extends Component {
 
   constructor(props) {
     super(props);
@@ -41,7 +41,7 @@ class Video extends Component {
          onEnd={this.onEnd}
          onError={this.videoError}
          style={styles.backgroundVideo} />
-        
+
 
 
     );
@@ -51,7 +51,7 @@ class Video extends Component {
   //   // Later to trigger fullscreen
   //   this.vid.presentFullscreenPlayer()
   // }
-    
+
 
   // // To set video position in seconds (seek)
   // this.player.seek(0)
@@ -61,7 +61,7 @@ class Video extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },  
+  },
   capture: {
     flex: 0,
     backgroundColor: '#fff',
@@ -83,4 +83,5 @@ const mapDispatchToProps = (dispatch) => ({
   // loginAction: (user, pass) => dispatch(loginAction(user, pass)),
 });
 
-export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(Video);
+
+export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(VideoComponent);

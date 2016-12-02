@@ -1,17 +1,42 @@
 import { CALL_API } from '../middlewares/apiClient';
 
-export const loginAction = (username, password) => ({
+export const fbLoginAction = (fbToken) => ({
   [CALL_API]: {
-    type:'LOGIN',
-    endpoint:'/login',
-    username,
-    password
+    method: 'POST',
+    type:'FB_TOKEN_LOGIN',
+    endpoint:'/sign-in/facebook',
+    data: { fbToken }
   }
 });
 
-export const setIdData = (tokenId, username, role) => ({
+export const selfLoginAction = (authToken) => {
+  console.log('selfLoginAction', authToken)
+  return {
+    [CALL_API]: {
+      method: 'POST',
+      type:'SELF_TOKEN_LOGIN',
+      endpoint:'/me',
+      data: { authToken }
+    }
+  };
+};
+
+// export const selfLoginAction = (authToken) => ({
+//   [CALL_API]: {
+//     method: 'POST',
+//     type:'SELF_TOKEN_LOGIN',
+//     endpoint:'/me',
+//     data: { authToken }
+//   }
+// });
+
+export const setIdData = (fbToken, authToken, fbId, firstName, lastName, picture, email) => ({
   type: 'SET_IDDATA',
-  tokenId,
-  username,
-  role
+  fbToken,
+  authToken,
+  fbId,
+  firstName,
+  lastName,
+  picture,
+  email,
 });
