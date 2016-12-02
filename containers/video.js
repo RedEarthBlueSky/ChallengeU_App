@@ -12,7 +12,7 @@ import {
 import Video from 'react-native-video';
 
 
-class Challenges extends Component {
+class VideoComponent extends Component {
 
   constructor(props) {
     super(props);
@@ -21,13 +21,12 @@ class Challenges extends Component {
 
   render() {
     return (
-      <View style={styles.container}>      
-        <Video source={{uri: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"}}
+        <Video source={{uri: "http://techslides.com/demos/sample-videos/small.mp4"}}
          ref={(vid) => {
          this.vid = vid
          }}
-         width={300}
-         height={300}
+         width={400}
+         height={400}
          rate={1.0}
          volume={1.0}
          muted = {false}
@@ -42,8 +41,9 @@ class Challenges extends Component {
          onEnd={this.onEnd}
          onError={this.videoError}
          style={styles.backgroundVideo} />
-        
-      </View>
+
+
+
     );
   }
 
@@ -51,7 +51,7 @@ class Challenges extends Component {
   //   // Later to trigger fullscreen
   //   this.vid.presentFullscreenPlayer()
   // }
-    
+
 
   // // To set video position in seconds (seek)
   // this.player.seek(0)
@@ -61,7 +61,7 @@ class Challenges extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },  
+  },
   capture: {
     flex: 0,
     backgroundColor: '#fff',
@@ -83,4 +83,4 @@ const mapDispatchToProps = (dispatch) => ({
   // loginAction: (user, pass) => dispatch(loginAction(user, pass)),
 });
 
-export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(Challenges);
+export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(VideoComponent);
