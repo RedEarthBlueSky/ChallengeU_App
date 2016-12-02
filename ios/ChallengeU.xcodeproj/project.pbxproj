@@ -25,6 +25,8 @@
 		9FD6605125644C588E45EB19 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B436921D9294A65B9C1FEB7 /* libRCTFBSDK.a */; };
 		2EF0751FB2DD4161813A5EC9 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41B7896CEEF84605B46FC4B0 /* libRCTCamera.a */; };
 		2E49A836AD424B9C8E5281F7 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9975C1CD7AE44D0840FBEFB /* libRCTVideo.a */; };
+		5CE60614C9B046D8B1680FD2 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C65E31AD92442A9B7347C2 /* libRNSpinkit.a */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,10 +133,18 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = ../node_modules/react-native/Libraries/Text/RCTText.xcodeproj; sourceTree = "<group>"; };
 		04DA703805B34F948E422E21 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; name = "RCTFBSDK.xcodeproj"; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		9B436921D9294A65B9C1FEB7 /* libRCTFBSDK.a */ = {isa = PBXFileReference; name = "libRCTFBSDK.a"; path = "libRCTFBSDK.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+<<<<<<< HEAD
 		87EA207A2CE3439E80A6BA6E /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; name = "RCTCamera.xcodeproj"; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		41B7896CEEF84605B46FC4B0 /* libRCTCamera.a */ = {isa = PBXFileReference; name = "libRCTCamera.a"; path = "libRCTCamera.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+<<<<<<< HEAD
 		1CA76700F18045EE8D545359 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; name = "RCTVideo.xcodeproj"; path = "../node_modules/react-native-video/RCTVideo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		B9975C1CD7AE44D0840FBEFB /* libRCTVideo.a */ = {isa = PBXFileReference; name = "libRCTVideo.a"; path = "libRCTVideo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+=======
+=======
+		A204B7E558864EFF9A212810 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; name = "RNSpinkit.xcodeproj"; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		C3C65E31AD92442A9B7347C2 /* libRNSpinkit.a */ = {isa = PBXFileReference; name = "libRNSpinkit.a"; path = "libRNSpinkit.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+>>>>>>> master
+>>>>>>> master
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,8 +171,15 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				9FD6605125644C588E45EB19 /* libRCTFBSDK.a in Frameworks */,
+<<<<<<< HEAD
 				2EF0751FB2DD4161813A5EC9 /* libRCTCamera.a in Frameworks */,
+<<<<<<< HEAD
 				2E49A836AD424B9C8E5281F7 /* libRCTVideo.a in Frameworks */,
+=======
+=======
+				5CE60614C9B046D8B1680FD2 /* libRNSpinkit.a in Frameworks */,
+>>>>>>> master
+>>>>>>> master
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,8 +303,15 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				04DA703805B34F948E422E21 /* RCTFBSDK.xcodeproj */,
+<<<<<<< HEAD
 				87EA207A2CE3439E80A6BA6E /* RCTCamera.xcodeproj */,
+<<<<<<< HEAD
 				1CA76700F18045EE8D545359 /* RCTVideo.xcodeproj */,
+=======
+=======
+				A204B7E558864EFF9A212810 /* RNSpinkit.xcodeproj */,
+>>>>>>> master
+>>>>>>> master
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -639,8 +663,15 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-video",
+=======
+=======
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
+>>>>>>> master
+>>>>>>> master
 				);
 				INFOPLIST_FILE = "ChallengeU/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -664,8 +695,15 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-video",
+=======
+=======
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
+>>>>>>> master
+>>>>>>> master
 				);
 				INFOPLIST_FILE = "ChallengeU/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -718,8 +756,15 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-video",
+=======
+=======
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
+>>>>>>> master
+>>>>>>> master
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -761,8 +806,15 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
+<<<<<<< HEAD
 					"$(SRCROOT)/../node_modules/react-native-video",
+=======
+=======
+					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
+>>>>>>> master
+>>>>>>> master
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

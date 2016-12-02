@@ -6,6 +6,7 @@ import android.util.Log;
 import com.facebook.react.ReactApplication;
 import com.brentvatne.react.ReactVideoPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
+import com.react.rnspinkit.RNSpinkitPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -16,6 +17,8 @@ import com.facebook.soloader.SoLoader;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
+
+import com.react.rnspinkit.RNSpinkitPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,11 +39,13 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
+      mCallbackManager = new CallbackManager.Factory().create(); // Added by Ruben
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new ReactVideoPackage(),
-            new RCTCameraPackage(),
-            new FBSDKPackage(mCallbackManager)
+        new MainReactPackage(),
+        new ReactVideoPackage(),
+        new RCTCameraPackage(),
+        new FBSDKPackage(mCallbackManager),
+        new RNSpinkitPackage()
       );
     }
   };

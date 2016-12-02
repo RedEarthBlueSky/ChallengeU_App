@@ -21,7 +21,18 @@ const {
   AccessToken
 } = FBSDK;
 
-export default class MainSceneComponent extends Component {
+class MainSceneComponent extends Component {
+
+  constructor(props) {
+    super(props);
+    // this.zoomPlus = zoomPlus.bind(this); // Binding functions for using in button events for example
+  }
+
+  componentWillReceiveProps (nextProps) {
+    // if (this.props.auth.authToken !== nextProps.auth.authToken && nextProps.auth.authToken !== '') {
+    //   this.props.getPanels({});
+    // }
+  }
 
   render() {
     return (
@@ -72,8 +83,14 @@ const styles = StyleSheet.create({
   },
   login: {
     position: 'absolute',
-    width: Dimensions.get('window').width,
-    justifyContent: 'center',
     bottom: 100
   }
 });
+
+const mapDispatchToProps = (dispatch) => ({
+  // Redux dispatches
+  // setIdData: (token) => dispatch(setIdData(token)),
+  // getPanels: (region) => dispatch(getPanels(region)),
+});
+
+export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(MainSceneComponent);
