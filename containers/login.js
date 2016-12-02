@@ -15,48 +15,60 @@ const {
   AccessToken
 } = FBSDK;
 
-import { loginAction } from '../actions/login.js';
+import { fbLoginAction } from '../actions/login.js';
 
 class Login extends Component {
 
+  onLogin = (token) => {
+    this.props.fbLoginAction(token)
+  }
+
   constructor(props) {
     super(props);
-    this.onLogIn = onLogIn.bind(this);
-    // checkLogin();
+
+    AccessToken.getCurrentAccessToken()
+      .then(
+        (data) => {
+          console.log(data);
+          if (data && data.accessToken) {
+            // We are already logged
+            this.onLogIn(data.accessToken);
+          } else {
+            console.log('data in non compliant format');
+          }
+        })
+      .catch((err) => {
+        console.log("Error accessing FB: ",err)
+      });
   }
 
   componentWillReceiveProps (nextProps) {
-    // // Example of who to detect state changes
-    // if (this.props.token !== nextProps.token && nextProps.token !== '') {
-    //   Actions.main();
-    // }
+    console.log('changes!')
+    if (this.props.login &&
+      nextProps.login &&
+      this.props.login.authToken !== nextProps.login.authToken &&
+      nextProps.login.authToken !== '') {
+      Actions.main();
+    }
+    if (this.props.login &&
+      nextProps.login &&
+      this.props.login.statusError !== nextProps.login.statusError &&
+      nextProps.login.statusError !== '') {
+      // Logout from facebook?
+    }
+
   }
 
-  // checkLogin() {
-  //
-  // }
-
   render() {
-    AccessToken.getCurrentAccessToken().then(
-      (data) => {
-        if (data.accessToken) {
-          // We are already logged
-          alert('Already logged!');
-          // lets move to main
-          Actions.main();
-        }
-
-      }
-    );
     return (
       <View style={styles.container}>
         <Text style = {{fontSize: 20, fontWeight: 'bold', textAlign: 'left'}}> Permissions </Text>
-        <Text style = {{fontSize: 16, paddingTop: 7, paddingLeft: 6, paddingRight: 8, lineHeight: 30}}> 
-        In order to submit a video or challenge your friends you have to sign in with Facebook. 
+        <Text style = {{fontSize: 16, paddingTop: 7, paddingLeft: 6, paddingRight: 8, lineHeight: 30}}>
+        In order to submit a video or challenge your friends you have to sign in with Facebook.
         We need some information to identify you and the list of friends so you can challenge them.
         </Text>
         <View style={styles.login}>
-          <LoginButton 
+          <LoginButton
             publishPermissions={["publish_actions"]}
             class = "login"
             onLoginFinished={
@@ -66,13 +78,15 @@ class Login extends Component {
                 } else if (result.isCancelled) {
                   console.log("login is cancelled.");
                 } else {
-                  AccessToken.getCurrentAccessToken().then(
-                    (data) => {
-                      console.log('FB Data: ' + JSON.stringify(data));
-                      console.log(data.accessToken.toString());
-                      onLogin(data.accessToken.toString());
-                    }
-                  )
+                  const ctx = this;
+                  AccessToken.getCurrentAccessToken()
+                    .then(
+                      (data) => {
+                        ctx.onLogin(data.accessToken.toString());
+                      })
+                    .catch((err) => {
+                      console.log('Error reading fbtoken: ', err);
+                    });
                 }
               }
             }
@@ -81,11 +95,6 @@ class Login extends Component {
       </View>
     );
   }
-}
-
-function onLogIn (token) {
-  // this.props.loginAction(this.state._username,this.state._password);
-  console.log(token);
 }
 
 const styles = StyleSheet.create({
@@ -106,9 +115,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // loginAction: (user, pass) => dispatch(loginAction(user, pass)),
+  fbLoginAction: (token) => dispatch(fbLoginAction(token))
 });
 
-export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(Login);
-
-// AppRegistry.registerComponent('ChallengeU', () => ChallengeU);
+export default connect(({routes, login})=>({routes, login}), mapDispatchToProps)(Login);
