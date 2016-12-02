@@ -14,6 +14,7 @@ import VideoComponent from './video.js';
 import SelectFriends from './selectfriends.js';
 import ChallengesScreen from './challengesscreen.js';
 import SpecificChallenge from './specificchallenge.js';
+import Loader from './loader.js';
 
 const RouterWithRedux = connect()(Router);
 
@@ -26,12 +27,13 @@ const store = composeWithDevTools(
 const scenes = Actions.create(
     <Scene key="root">
       <Scene key="main" component={MainSceneComponent} type={ActionConst.REPLACE} title="Main" />
-      <Scene key="camera" component={CameraComponent} type={ActionConst.REPLACE} title="Camera!" hideNavBar="true" initial={true}/>
+      <Scene key="camera" component={CameraComponent} type={ActionConst.REPLACE} title="Camera!" hideNavBar="true" />
       <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Sign in with Facebook" />
-      <Scene key="video" component={VideoComponent} type={ActionConst.REPLACE} title="Challenges" />
       <Scene key="select" component={SelectFriends} type={ActionConst.REPLACE} title="Challenges" />
+      <Scene key="video" component={VideoComponent} type={ActionConst.REPLACE} title="Challenges" initial={true} />
       <Scene key="challengesScreen" component={ChallengesScreen} type={ActionConst.REPLACE} title="Challenges" />
       <Scene key="SpecificChallenge" component={SpecificChallenge} type={ActionConst.REPLACE} title="The challenge" />
+      <Scene key="loader" hideNavBar="true" component={Loader} type={ActionConst.REPLACE} title="Ready for challenge?" />
     </Scene>
 );
 
