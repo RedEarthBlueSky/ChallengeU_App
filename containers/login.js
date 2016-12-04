@@ -32,7 +32,7 @@ class Login extends Component {
           console.log(data);
           if (data && data.accessToken) {
             // We are already logged
-            this.onLogIn(data.accessToken);
+            this.onLogin(data.accessToken);
           } else {
             console.log('data in non compliant format');
           }
@@ -43,12 +43,11 @@ class Login extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('changes!')
     if (this.props.login &&
       nextProps.login &&
       this.props.login.authToken !== nextProps.login.authToken &&
       nextProps.login.authToken !== '') {
-      Actions.main();
+      Actions.challengesScreen();
     }
     if (this.props.login &&
       nextProps.login &&

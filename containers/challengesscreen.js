@@ -13,13 +13,20 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import Item from '../components/griditem.js'
+const FBSDK = require('react-native-fbsdk');
+const {
+  GraphRequest,
+  GraphRequestManager,
+} = FBSDK;
+
+import Item from '../components/griditem.js';
+import { setTaggableFriends } from '../actions/taggableFriends.js';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    paddingTop: 55 
+    paddingTop: 55
   },
   grid: {
     flexDirection: 'row',
@@ -84,13 +91,17 @@ class ChallengesScreen extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.getTaggableFriends();
+  }
+
   items = function() {
     let itemsList = [];
     for (let i = 1; i < this.challengesList.length; i++) {
       itemsList.push(
-        <Item key={i} 
-          style={styles.gridItem} 
-          pic={this.challengesList[i].pic} 
+        <Item key={i}
+          style={styles.gridItem}
+          pic={this.challengesList[i].pic}
           name={this.challengesList[i].name} />
       )
     }
@@ -101,6 +112,25 @@ class ChallengesScreen extends React.Component {
     console.log(data);
     Actions.SpecificChallenge({title: 'Ice Bucket Challenge'})
   }
+
+  getTaggableFriends = () => {
+    const infoRequest = new GraphRequest(
+      '/me/taggable_friends',
+      null,
+      this._responseInfoCallback,
+    );
+    // Start the graph request.
+    new GraphRequestManager().addRequest(infoRequest).start();
+  };
+
+  _responseInfoCallback = function(error: ?Object, result: ?Object) {
+    if (error) {
+      console.log('Error fetching data: ' + error.toString());
+    } else {
+      console.log(this);
+      this.props.setTaggableFriends(result.data);
+    }
+  }.bind(this);
 
   render() {
     return (
@@ -119,8 +149,9 @@ class ChallengesScreen extends React.Component {
 }
 
 
+
 const mapDispatchToProps = (dispatch) => ({
-  // loginAction: (user, pass) => dispatch(loginAction(user, pass)),
+  setTaggableFriends: (list) => dispatch(setTaggableFriends(list)),
 });
 
-export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(ChallengesScreen);
+export default connect(({routes, login})=>({routes, login}), mapDispatchToProps)(ChallengesScreen);
