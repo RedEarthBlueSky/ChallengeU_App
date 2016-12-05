@@ -21,7 +21,7 @@ class Loader extends Component {
 
   componentDidMount() {
     // delete asyncstorage and relogin until
-    // AsyncStorage.removeItem('idData');
+    AsyncStorage.removeItem('idData');
     AsyncStorage.getItem('idData').then((value) => {
       if (value && value !== '') {
         let idObj = JSON.parse(value);

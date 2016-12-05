@@ -3,12 +3,15 @@ import routes from './routes.js';
 import login from './login.js';
 import submission from './submission.js';
 import challenges from './challengesscreen.js';
+import submissions from './submissions.js';
+
 // ... other reducers
 
 export default combineReducers({
   routes,
   login,
   submission,
-  challenges
+  challenges,
+  submissions
   // ... other reducers
 });
