@@ -93,6 +93,7 @@ class ChallengesScreen extends React.Component {
 
   componentDidMount() {
     this.getTaggableFriends();
+    Actions.camera({challengeId: "58419a471de12b2679f4a43c"}); // Just for testing, delete please!
   }
 
   items = function() {
@@ -125,7 +126,7 @@ class ChallengesScreen extends React.Component {
 
   _responseInfoCallback = function(error: ?Object, result: ?Object) {
     if (error) {
-      console.log('Error fetching data: ' + error.toString());
+      console.log('Error fetching data: ',error);
     } else {
       console.log(this);
       this.props.setTaggableFriends(result.data);
