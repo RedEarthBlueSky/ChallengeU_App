@@ -54,20 +54,27 @@ class SelectFriends extends React.Component {
           let user = {};
           user.name = this.friendsList[i].name;
           user.picture = this.friendsList[i].picture.data.url;
+          users.push(user);
         }
       }
+      var fileName = this.props.videoPath.split("/").pop();
       let video = {
         uri: this.props.videoPath,
       	type: 'video/mp4',
-      	name: 'video.mp4',
+      	name: fileName,
       }
+      console.log('fileName: ',fileName);
       let body = new FormData();
       body.append('videoURL', video);
-      body.append('comment', 'Challenge completed!')
-      body.append('challengeTypeId', this.props.challengeId)
-      body.append('challengedUsers', users);
+      body.append('comment', 'Challenge completed!');
+      body.append('challengeTypeId', this.props.challengeId);
+      body.append('challengedUsers', JSON.stringify(users));
+      body.append('fileName', fileName);
 
       this.props.postSubmission(body);
+
+      // TODO: Force feed update when the video finishes loading
+      Actions.MySubmissions();
 
     } else if (this.state.actual < 0) {
       Alert.alert('You have to choose just 3 friends!');
