@@ -8,11 +8,15 @@ const styles = StyleSheet.create({
     flex: 1
   },
   text: {
-    fontSize: 20,
+    fontSize: 22,
     paddingLeft: 5,
     fontWeight: 'bold',
-    backgroundColor: 'rgba(0,0,0,0.5)',
     color: 'white'
+  },
+  transparent: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    height: 50,
+    justifyContent: 'center'
   },
   photo: {
     flex:1,
@@ -26,9 +30,11 @@ const Item = (props) => (
   <View style={props.style}>
     <View style={styles.itemDesign}>
       <Image source={{ uri: props.pic}} style={styles.photo} >
-        <Text style={styles.text}>
-          {props.name}
-        </Text>
+        <View style={styles.transparent}>
+          <Text style={styles.text}>
+            {props.name}
+          </Text>
+        </View>
       </Image>
     </View>
   </View>

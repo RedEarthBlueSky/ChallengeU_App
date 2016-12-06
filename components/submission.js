@@ -31,14 +31,15 @@ const styles = StyleSheet.create({
 
 
 const Submission = (props) => {
+
   renderFriends = function () {
     return props.challengedUsers.map(function(user) {
       let actualState = user.status === 'Done' ? "has took it" : "haven't took it yet";
       return (
-        <View style={styles.information}>
-          <Image source={{ uri: user.userPic}} style={personalized(user.status)} />
+        <View style={styles.information} key={user._id}>
+          <Image source={{ uri: user.picture}} style={personalized(user.status)} />
           <Text style={styles.text1}>
-            {`${user.userName} ${actualState}`}
+            {`${user.name} ${actualState}`}
           </Text>
         </View>
         )
@@ -66,7 +67,7 @@ const Submission = (props) => {
 
     <View style={styles.container}>
 
-      <Text style={styles.text2}> {props.challengeName} </Text>
+      <Text style={styles.text2}> {props.challengeTypeId.title} </Text>
       <Image source={{ uri: props.captureURL}} style={styles.video} />
 
     </View>

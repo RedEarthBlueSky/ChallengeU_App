@@ -47,6 +47,8 @@ export default store => next => action => {
   if (currentState.login.authToken && currentState.login.authToken !== '') {
     headers.append('Authorization', `Bearer ${currentState.login.authToken}`);
   }
+  // eliminar mas tarde *****************************
+  headers.append('Authorization', `Bearer 6fd88d8e-3b14-4f8d-b35e-58960f47fc7e`);
 
   if (data) headers.append('content-type','application/json');
 
