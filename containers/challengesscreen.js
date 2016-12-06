@@ -59,8 +59,9 @@ class ChallengesScreen extends React.Component {
     let itemsList = [];
     for (let i = 1; i < this.props.challenges.list.length; i++) {
       itemsList.push(
-        <TouchableOpacity onPress={() => this.action(this.props.challenges.list[i].title, this.props.challenges.list[i]._id)}>
-          <Item key={i} 
+        <TouchableOpacity key={i} 
+          onPress={() => this.action(this.props.challenges.list[i].title, this.props.challenges.list[i]._id)}>
+          <Item 
             style={styles.gridItem} 
             pic={this.props.challenges.list[i].imageURL} 
             name={this.props.challenges.list[i].title} />
