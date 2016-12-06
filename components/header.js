@@ -20,14 +20,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const Header = (props) => (
-  <View style={styles.container}>
-    <TextInput
-      style={styles.input}
-      placeholder="Search..."
-      onChangeText={(text) => console.log('searching for ', text)}
-    />
-  </View>
-);
+const Header = (props) => {
+  return (
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Search..."
+        onChangeText={(text) => console.log('searching for ', text)}
+      />
+    </View>
+)};
 
 export default Header;

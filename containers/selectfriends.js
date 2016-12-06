@@ -70,7 +70,6 @@ class SelectFriends extends React.Component {
     const numSelected = this.friendsList.reduce((acum, el) => { 
       return el.selected ? acum+1: acum
     }, 0 )
-    console.log('# of selected', numSelected);
 
     this.setState({ 
       dataSource: this.ds.cloneWithRows(this.friendsList),
