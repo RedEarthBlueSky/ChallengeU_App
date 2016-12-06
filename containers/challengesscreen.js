@@ -30,16 +30,17 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   gridItem: {
-    flex:1,
-    width: 178,
+    flex: 1,
+    width: 183,
     height: 178,
-    margin:3
+    marginLeft: 6,
+    margin: 3
   },
   gridFirst: {
-    flex:1,
-    width: 360,
+    flex: 1,
+    width: 370,
     height: 360,
-    margin:3
+    margin: 3
   }
 });
 

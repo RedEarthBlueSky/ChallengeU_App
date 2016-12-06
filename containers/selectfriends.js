@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 
 import Row from '../components/row.js';
+import Header from '../components/header.js';
 
 const onButtonPress = () => {
   // submit if this.state.actual = 0;
@@ -94,7 +95,7 @@ class SelectFriends extends React.Component {
 
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={ 
+        renderRow={
           (data) => {
             return <Row
               data={data}
@@ -103,6 +104,7 @@ class SelectFriends extends React.Component {
               {...data} />
           }
         }
+        renderHeader={() => <Header/>}
       />
 
       </View>
