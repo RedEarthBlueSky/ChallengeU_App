@@ -16,8 +16,8 @@ import {
 } from 'react-native';
 
 import Row from '../components/row.js';
+import Header from '../components/header.js';
 import { postSubmission } from '../actions/submission.js';
-
 
 class SelectFriends extends React.Component {
 
@@ -41,13 +41,8 @@ class SelectFriends extends React.Component {
   }
 
   onButtonPress = (() => {
-    // submit if this.state.actual = 0;
-    // send video, send array friends
-    // go to my submissions view
 
-    // Check if three users are challenged
     if (this.state.actual === 0) {
-      // Gather all data and execute submission
       let users = [];
       for (var i = 0; i < this.friendsList.length; i++) {
         if (this.friendsList[i].selected) {
@@ -90,12 +85,15 @@ class SelectFriends extends React.Component {
     const numSelected = this.friendsList.reduce((acum, el) => {
       return el.selected ? acum+1: acum
     }, 0 )
-    console.log('# of selected', numSelected);
 
     this.setState({
       dataSource: this.ds.cloneWithRows(this.friendsList),
       actual: Math.max(3 - numSelected, 0)
     })
+  }
+
+  onSearch(query){
+    console.log(query);
   }
 
   render() {
@@ -125,6 +123,7 @@ class SelectFriends extends React.Component {
               {...data} />
           }
         }
+        renderHeader={() => <Header onSearch={this.onSearch} />}
       />
 
       </View>
