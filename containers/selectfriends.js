@@ -77,6 +77,10 @@ class SelectFriends extends React.Component {
     }) 
   }
 
+  onSearch(query){
+    console.log(query);
+  }
+
   render() {
     return (
       <View style = {styles.container}>
@@ -103,7 +107,7 @@ class SelectFriends extends React.Component {
               {...data} />
           }
         }
-        renderHeader={() => <Header/>}
+        renderHeader={() => <Header onSearch={this.onSearch} />}
       />
 
       </View>
