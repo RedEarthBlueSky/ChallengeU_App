@@ -39,7 +39,6 @@ class SpecificChallenge extends React.Component {
     super(props);
     
     this.props.getChallengeSubmissions(this.props.challengeId)
-
   }
 
   render() {

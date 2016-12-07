@@ -49,6 +49,7 @@ export default store => next => action => {
   if (currentState.login.authToken && currentState.login.authToken !== '') {
     headers.append('Authorization', `Bearer ${currentState.login.authToken}`);
   }
+
   if (multipart) {
     headers.append('content-type','multipart/form-data');
   } else {

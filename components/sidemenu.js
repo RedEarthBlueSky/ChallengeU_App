@@ -16,14 +16,14 @@ class SideMenu extends React.Component {
         </TouchableOpacity>
         <View style={styles.separator} />
 
-        <TouchableOpacity onPress={Actions.feed}>
+        <TouchableOpacity onPress={Actions.challengesScreen}>
           <Text style={styles.text}>
             Challenges
           </Text>
         </TouchableOpacity>
         <View style={styles.separator} />
 
-        <TouchableOpacity onPress={Actions.challengesScreen}>
+        <TouchableOpacity onPress={Actions.feed}>
           <Text style={styles.text}>
             Feed
           </Text>

@@ -7,3 +7,14 @@ export const getChallengeSubmissions = (id) => ({
     endpoint:`/submissions/challenge/${id}`
   }
 });
+
+export const getSelfSubmissions = () => {
+  console.log('in action')
+  return ({
+  [CALL_API]: {
+    method: 'GET',
+    type:'GET_SELF_SUBMISSIONS',
+    endpoint:`/submissions/self`
+  }
+})
+};
