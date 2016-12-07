@@ -68,14 +68,14 @@ class Challenge extends React.Component {
     return (
       <View style={{flex: 1}}>
         <View style={styles.container}>
-          <Image source={{ uri: this.props.pictureId}} style={styles.photo} />
+          <Image source={{ uri: this.props.authorId.profileInfo.picture}} style={styles.photo} />
           <Text style={styles.text}>
-            {`${this.props.userName} took the`} <Text style={{fontWeight: 'bold'}}> "challenge name" </Text>
+            {`${this.props.authorId.profileInfo.firstName} ${this.props.authorId.profileInfo.lastName} took the`} <Text style={{fontWeight: 'bold'}}> {this.props.challengeTypeId.title} </Text>
           </Text>
         </View>
         <View style={styles.information}>
           {this.playVideo()}
-          <Text style={styles.text}> {this.props.userName} has engaged 18 people </Text>
+          <Text style={styles.text}> {this.props.authorId.profileInfo.firstName} has engaged 18 people </Text>
           <Text style={styles.text}> 156 people took the challenge in total </Text>
         </View>
       </View>

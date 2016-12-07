@@ -64,24 +64,26 @@ class ChallengesScreen extends React.Component {
 
   componentDidMount() {
     this.getTaggableFriends();
-    Actions.camera({challengeId: "58419a471de12b2679f4a43c"}); // Just for testing, delete please!
   }
 
   items = function() {
     let itemsList = [];
     for (let i = 1; i < this.props.challenges.list.length; i++) {
       itemsList.push(
-        <Item key={i}
-          style={styles.gridItem}
-          pic={this.props.challenges.list[i].imageURL}
-          name={this.props.challenges.list[i].title} />
+        <TouchableOpacity key={i}
+          onPress={() => this.action(this.props.challenges.list[i].title, this.props.challenges.list[i]._id)}>
+          <Item
+            style={styles.gridItem}
+            pic={this.props.challenges.list[i].imageURL}
+            name={this.props.challenges.list[i].title} />
+        </TouchableOpacity>
       )
     }
     return itemsList
   }
 
-  action = (data) => {
-    Actions.SpecificChallenge({title: 'Ice Bucket Challenge'})
+  action = (title, challengeId) => {
+    Actions.SpecificChallenge({title, challengeId})
   }
 
   getTaggableFriends = () => {
@@ -105,17 +107,18 @@ class ChallengesScreen extends React.Component {
 
   render() {
     if (this.props.challenges.list.length === 0) return <View></View>;
+
     return (
-      <TouchableOpacity onPress={this.action}>
         <ScrollView>
           <View style={styles.container}>
             <View style={styles.grid}>
-              <Item style={styles.gridFirst} pic={this.props.challenges.list[0].imageURL} name={this.props.challenges.list[0].title} />
+              <TouchableOpacity style={styles.gridFirst} onPress={() => this.action(this.props.challenges.list[0].title, this.props.challenges.list[0]._id)}>
+                <Item style={styles.gridFirst} pic={this.props.challenges.list[0].imageURL} name={this.props.challenges.list[0].title} />
+              </TouchableOpacity>
               {this.items()}
             </View>
           </View>
         </ScrollView>
-      </TouchableOpacity>
     );
   }
 }

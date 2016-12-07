@@ -16,6 +16,7 @@ import ChallengesScreen from './challengesscreen.js';
 import SpecificChallenge from './specificchallenge.js';
 import MySubmissions from './mysubmissions.js';
 import Loader from './loader.js';
+import MyDrawer from '../components/drawer.js';
 
 const RouterWithRedux = connect()(Router);
 
@@ -26,6 +27,7 @@ const store = composeWithDevTools(
 )(createStore)(reducers);
 
 const scenes = Actions.create(
+  <Scene key="drawer" component={MyDrawer} open={false} >
     <Scene key="root">
       <Scene key="main" component={MainSceneComponent} type={ActionConst.REPLACE} title="Main" />
       <Scene key="camera" component={CameraComponent} type={ActionConst.REPLACE} title="Camera!" hideNavBar="true" />
@@ -37,6 +39,7 @@ const scenes = Actions.create(
       <Scene key="MySubmissions" component={MySubmissions} type={ActionConst.REPLACE} title="My submissions" />
       <Scene key="loader" hideNavBar="true" component={Loader} type={ActionConst.REPLACE} title="Ready for challenge?" initial={true}/>
     </Scene>
+  </Scene>
 );
 
 export default class ChallengeU extends Component {
