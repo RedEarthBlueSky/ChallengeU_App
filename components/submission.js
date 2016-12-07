@@ -34,7 +34,7 @@ const Submission = (props) => {
 
   renderFriends = function () {
     return props.challengedUsers.map(function(user) {
-      let actualState = user.status === 'Done' ? "has took it" : "haven't took it yet";
+      let actualState = user.status === 'Done' ? "has took it" : "hasn't took it yet";
       return (
         <View style={styles.information} key={user._id}>
           <Image source={{ uri: user.picture}} style={personalized(user.status)} />
