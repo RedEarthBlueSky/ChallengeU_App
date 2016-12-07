@@ -1,12 +1,14 @@
 const API_ROOT = require('../config.json').apiRoot;
 
-const callApi = (endpoint, method, headers, data) => {
+const callApi = (endpoint, method, headers, data, multipart) => {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
   return new Promise((resolve, reject) => {
+    let body = JSON.stringify(data);
+    if (multipart) body = data;
     fetch(fullUrl, {
       method,
       headers,
-      body: JSON.stringify(data)
+      body
     })
     .then(response => {
       console.log(response);
@@ -37,7 +39,7 @@ export default store => next => action => {
   const callAPI = action[CALL_API];
   if (typeof callAPI === 'undefined') return next(action);
 
-  let { endpoint, method, headers, data } = callAPI;
+  let { endpoint, method, headers, data, multipart } = callAPI;
   const { type, username, password } = callAPI;
 
   method = method || 'GET';
@@ -47,8 +49,11 @@ export default store => next => action => {
   if (currentState.login.authToken && currentState.login.authToken !== '') {
     headers.append('Authorization', `Bearer ${currentState.login.authToken}`);
   }
-
-  if (data) headers.append('content-type','application/json');
+  if (multipart) {
+    headers.append('content-type','multipart/form-data');
+  } else {
+    if (data) headers.append('content-type','application/json');
+  }
 
   if (typeof endpoint !== 'string') {
     throw new Error('Specify a string endpoint URL.');
@@ -65,7 +70,7 @@ export default store => next => action => {
 
   next(actionWith({type: `${type}_REQUEST`}));
 
-  return callApi(endpoint, method, headers, data)
+  return callApi(endpoint, method, headers, data, multipart)
   .then(
     response => {
       next(

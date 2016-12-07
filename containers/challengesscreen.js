@@ -15,13 +15,20 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import Item from '../components/griditem.js'
+const FBSDK = require('react-native-fbsdk');
+const {
+  GraphRequest,
+  GraphRequestManager,
+} = FBSDK;
+
+import Item from '../components/griditem.js';
+import { setTaggableFriends } from '../actions/taggableFriends.js';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    paddingTop: 55 
+    paddingTop: 55
   },
   grid: {
     flexDirection: 'row',
@@ -55,15 +62,19 @@ class ChallengesScreen extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.getTaggableFriends();
+  }
+
   items = function() {
     let itemsList = [];
     for (let i = 1; i < this.props.challenges.list.length; i++) {
       itemsList.push(
-        <TouchableOpacity key={i} 
+        <TouchableOpacity key={i}
           onPress={() => this.action(this.props.challenges.list[i].title, this.props.challenges.list[i]._id)}>
-          <Item 
-            style={styles.gridItem} 
-            pic={this.props.challenges.list[i].imageURL} 
+          <Item
+            style={styles.gridItem}
+            pic={this.props.challenges.list[i].imageURL}
             name={this.props.challenges.list[i].title} />
         </TouchableOpacity>
       )
@@ -74,6 +85,25 @@ class ChallengesScreen extends React.Component {
   action = (title, challengeId) => {
     Actions.SpecificChallenge({title, challengeId})
   }
+
+  getTaggableFriends = () => {
+    const infoRequest = new GraphRequest(
+      '/me/taggable_friends',
+      null,
+      this._responseInfoCallback,
+    );
+    // Start the graph request.
+    new GraphRequestManager().addRequest(infoRequest).start();
+  };
+
+  _responseInfoCallback = function(error: ?Object, result: ?Object) {
+    if (error) {
+      console.log('Error fetching data: ',error);
+    } else {
+      console.log(this);
+      this.props.setTaggableFriends(result.data);
+    }
+  }.bind(this);
 
   render() {
     if (this.props.challenges.list.length === 0) return <View></View>;
@@ -94,7 +124,9 @@ class ChallengesScreen extends React.Component {
 }
 
 
+
 const mapDispatchToProps = (dispatch) => ({
+  setTaggableFriends: (list) => dispatch(setTaggableFriends(list)),
   challengesList: () => dispatch(challengesList()),
 });
 
