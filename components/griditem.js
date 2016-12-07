@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableHighlight, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 
@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   text: {
-    fontSize: 22,
-    paddingLeft: 5,
+    fontSize: 20,
+    paddingLeft: 15,
     fontWeight: 'bold',
     color: 'white'
   },
@@ -19,25 +19,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   photo: {
-    flex:1,
-    resizeMode: 'cover',
-    flexDirection: 'column',
-    justifyContent: 'flex-end'
+    width: Dimensions.get("window").width - 4,
+    height: 370,
   }
 });
 
-const Item = (props) => (
-  <View style={props.style}>
-    <View style={styles.itemDesign}>
-      <Image source={{ uri: props.pic}} style={styles.photo} >
-        <View style={styles.transparent}>
-          <Text style={styles.text}>
-            {props.name}
-          </Text>
-        </View>
-      </Image>
+const Item = (props) => {
+  return <Image source={{ uri: props.pic}} 
+    style={[styles.photo]} >
+    <View style={styles.transparent}>
+      <Text style={styles.text}>
+        {props.name}
+      </Text>
     </View>
-  </View>
-);
+  </Image>
+}
 
 export default Item;

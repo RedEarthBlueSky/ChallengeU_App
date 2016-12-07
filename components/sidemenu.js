@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     paddingLeft: 10,
-    backgroundColor: 'rgba(0,0,0,0.4)'
+    backgroundColor: '#1e90ff'
   },
   text: {
     lineHeight: 50,
