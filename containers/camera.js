@@ -50,15 +50,13 @@ class CameraComponent extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.isRecording === false && nextProps.recordedFile !== '') {
-      Actions.main();
+    if (this.state.isRecording === false && this.state.recordedFile !== '') {
+      Actions.select({challengeId: this.props.challengeId, videoPath: this.state.recordedFile});
     }
   }
 
   startVideo() {
-    console.log('pressed!');
     if (this.camera && !this.state.isRecording) {
-      console.log('start recording');
       this.setState({
         isRecording: true,
         buttonStyle: styles.captureRecording
@@ -74,7 +72,6 @@ class CameraComponent extends Component {
       )
       .catch(err => console.error(err));
     } else {
-      console.log('Stop recording...');
       this.camera.stopCapture()
         .then((data) => {
           console.log(data);
@@ -100,12 +97,6 @@ class CameraComponent extends Component {
     }
     console.log('Camera change to:', this.state.source);
   }
-
-  // stopVideo() {
-  //   this.camera.stopCapture()
-  //     .then((data) => console.log(data))
-  //     .catch(err => console.error(err));
-  // }
 
 }
 

@@ -4,6 +4,7 @@ import login from './login.js';
 import submission from './submission.js';
 import challenges from './challengesscreen.js';
 import submissions from './submissions.js';
+import taggableFriends from './taggableFriends.js';
 
 // ... other reducers
 
@@ -12,6 +13,7 @@ export default combineReducers({
   login,
   submission,
   challenges,
-  submissions
+  submissions,
+  taggableFriends
   // ... other reducers
 });

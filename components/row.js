@@ -6,12 +6,12 @@ class Row extends React.Component{
   render() {
     const { data, onValueChange, ...props } = this.props
     return <View style={styles.container}>
-      <Switch 
+      <Switch
         onValueChange={(value)=> { this.props.onValueChange(value, data) }}
         {...props}
         />
       <Text style={styles.text}>
-        {`${this.props.name.first} ${this.props.name.last}`}
+        {`${this.props.name}`}
       </Text>
     </View>
   }

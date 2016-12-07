@@ -36,8 +36,8 @@ const scenes = Actions.create(
       <Scene key="camera" component={CameraComponent} type={ActionConst.REPLACE} title="Camera!" hideNavBar="true" />
       <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Sign in with Facebook" />
       <Scene key="video" component={VideoComponent} type={ActionConst.REPLACE} title="Challenges" />
-      <Scene key="select" component={SelectFriends} type={ActionConst.REPLACE} title="Challenge your friends" initial={true}/>
-      <Scene key="loader" hideNavBar="true" component={Loader} type={ActionConst.REPLACE} title="Ready for challenge?" />
+      <Scene key="select" component={SelectFriends} type={ActionConst.REPLACE} title="Challenge your friends" />
+      <Scene key="loader" hideNavBar="true" component={Loader} type={ActionConst.REPLACE} title="Ready for challenge?" initial={true}/>
     </Scene>
   </Scene>
 );

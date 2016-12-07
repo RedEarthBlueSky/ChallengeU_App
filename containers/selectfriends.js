@@ -11,43 +11,15 @@ import {
   ListView,
   View,
   Dimensions,
-  TouchableHighlight
+  TouchableHighlight,
+  Alert
 } from 'react-native';
 
 import Row from '../components/row.js';
 import Header from '../components/header.js';
-
-const onButtonPress = () => {
-  // submit if this.state.actual = 0;
-  // send video, send array friends
-  // go to my submissions view
-};
-
+import { postSubmission } from '../actions/submission.js';
 
 class SelectFriends extends React.Component {
-  friendsList = [
-    {
-      "name": {
-        "first": "aiden",
-        "last": "lucas"
-      },
-      "selected": false
-    },
-    {
-      "name": {
-        "first": "arol",
-        "last": "vinyolas"
-      },
-      "selected": false
-    },
-    {
-      "name": {
-        "first": "ian",
-        "last": "salt"
-      },
-      "selected": false
-    }
-  ]
 
   ds = new ListView.DataSource({rowHasChanged: (r1, r2) => {
       return r1 !== r2
@@ -57,24 +29,67 @@ class SelectFriends extends React.Component {
   constructor(props) {
     super(props);
 
+    this.friendsList = this.props.taggableFriends.list.slice(0);
+    for (var i = 0; i < this.friendsList.length; i++) {
+      this.friendsList[i].selected = false;
+    }
+
     this.state = {
       actual: 3,
       dataSource: this.ds.cloneWithRows(this.friendsList)
     }
   }
 
+  onButtonPress = (() => {
+
+    if (this.state.actual === 0) {
+      let users = [];
+      for (var i = 0; i < this.friendsList.length; i++) {
+        if (this.friendsList[i].selected) {
+          let user = {};
+          user.name = this.friendsList[i].name;
+          user.picture = this.friendsList[i].picture.data.url;
+          users.push(user);
+        }
+      }
+      var fileName = this.props.videoPath.split("/").pop();
+      let video = {
+        uri: this.props.videoPath,
+      	type: 'video/mp4',
+      	name: fileName,
+      }
+      console.log('fileName: ',fileName);
+      let body = new FormData();
+      body.append('videoURL', video);
+      body.append('comment', 'Challenge completed!');
+      body.append('challengeTypeId', this.props.challengeId);
+      body.append('challengedUsers', JSON.stringify(users));
+      body.append('fileName', fileName);
+
+      this.props.postSubmission(body);
+
+      // TODO: Force feed update when the video finishes loading
+      Actions.MySubmissions();
+
+    } else if (this.state.actual < 0) {
+      Alert.alert('You have to choose just 3 friends!');
+    } else if (this.state.actual > 0) {
+      Alert.alert('You have to choose 3 friends!');
+    }
+  }).bind(this);
+
   onSwitchChange = (selected,data) => {
     const el = this.friendsList.find(el => (el===data))
     el.selected = selected
 
-    const numSelected = this.friendsList.reduce((acum, el) => { 
+    const numSelected = this.friendsList.reduce((acum, el) => {
       return el.selected ? acum+1: acum
     }, 0 )
 
-    this.setState({ 
+    this.setState({
       dataSource: this.ds.cloneWithRows(this.friendsList),
       actual: Math.max(3 - numSelected, 0)
-    }) 
+    })
   }
 
   onSearch(query){
@@ -82,16 +97,17 @@ class SelectFriends extends React.Component {
   }
 
   render() {
+    // TODO: Add comment to submission
     return (
       <View style = {styles.container}>
-      <Text style = {{fontSize: 16, paddingLeft: 20}}> 
+      <Text style = {{fontSize: 16, paddingLeft: 20}}>
       Select the friends to challenge ({this.state.actual} left)
       </Text>
 
       <View style = {styles.button}>
       <Button
           disabled={this.state.actual === 0 ? false : true}
-          onPress={onButtonPress}
+          onPress={this.onButtonPress}
           title="Submit"
         />
       </View>
@@ -103,7 +119,7 @@ class SelectFriends extends React.Component {
             return <Row
               data={data}
               value={data.selected}
-              onValueChange={ (value,data) => this.onSwitchChange(value,data) } 
+              onValueChange={ (value,data) => this.onSwitchChange(value,data) }
               {...data} />
           }
         }
@@ -130,7 +146,10 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // loginAction: (user, pass) => dispatch(loginAction(user, pass)),
+  postSubmission: (submission) => dispatch(postSubmission(submission))
 });
 
-export default connect(({routes, auth})=>({routes, auth}), mapDispatchToProps)(SelectFriends);
+export default connect(
+  ({routes, auth, taggableFriends, submission})=>
+  ({routes, auth, taggableFriends}),
+  mapDispatchToProps)(SelectFriends);
