@@ -21,13 +21,12 @@ class Loader extends Component {
 
   componentDidMount() {
     // delete asyncstorage and relogin until
-    // AsyncStorage.removeItem('idData');
+    AsyncStorage.removeItem('idData');
     AsyncStorage.getItem('idData').then((value) => {
       if (value && value !== '') {
         let idObj = JSON.parse(value);
         // if there is a problem delete asyncstorage and relogin
         // AsyncStorage.removeItem('idData');
-        console.log(this.props);
         this.props.selfLoginAction(idObj.authToken);
       }
       else {
@@ -98,15 +97,15 @@ const styles = StyleSheet.create({
 
 const goToMain = () => {
   setTimeout(() => {
-    Actions.main();
+    Actions.challengesScreen();
   },SPINNER_TIME);
-}
+};
 
 const goToLogin = () => {
   setTimeout(() => {
     Actions.login();
   },SPINNER_TIME);
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
   selfLoginAction: (token) => dispatch(selfLoginAction(token))
