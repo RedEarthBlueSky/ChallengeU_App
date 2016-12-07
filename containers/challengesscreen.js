@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { challengesList } from '../actions/challengesscreen.js';
+
 
 import {
   AppRegistry,
@@ -54,38 +56,7 @@ class ChallengesScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.challengesList = [
-      {
-        "name": "Ice bucket challenge",
-        "pic": "http://www.oneillinstituteblog.org/wp-content/uploads/2015/07/140819-ice-bucket-challenge-1949_899e03e1c58b45b56812f96bc79680a6.jpg",
-        "views": 150
-      },
-      {
-        "name": "Cinamonn challenge",
-        "pic": "http://www.planwallpaper.com/static/images/desktop-year-of-the-tiger-images-wallpaper.jpg",
-        "views": 50
-      },
-      {
-        "name": "Coffee challenge",
-        "pic": "http://7606-presscdn-0-74.pagely.netdna-cdn.com/wp-content/uploads/2016/03/Dubai-Photos-Images-Travel-Tourist-Images-Pictures-800x600.jpg",
-        "views": 20
-      },
-      {
-        "name": "Rounded challenge",
-        "pic": "http://www.gettyimages.com/landing/assets/static_content/home/info-tabs2.jpg",
-        "views": 150
-      },
-      {
-        "name": "Alcohol challenge",
-        "pic": "http://www.gettyimages.com/gi-resources/images/Editorial-Images/Entertainment.jpg",
-        "views": 50
-      },
-      {
-        "name": "Boot camp challenge",
-        "pic": "http://www.esa.int/var/esa/storage/images/esa_multimedia/images/2016/03/ultraviolet_image_shows_the_sun_s_intricate_atmosphere/15891756-1-eng-GB/Ultraviolet_image_shows_the_Sun_s_intricate_atmosphere_node_full_image_2.jpg",
-        "views": 20
-      }
-    ];
+    this.props.challengesList()
 
     this.state = {
     };
@@ -98,19 +69,18 @@ class ChallengesScreen extends React.Component {
 
   items = function() {
     let itemsList = [];
-    for (let i = 1; i < this.challengesList.length; i++) {
+    for (let i = 1; i < this.props.challenges.list.length; i++) {
       itemsList.push(
         <Item key={i}
           style={styles.gridItem}
-          pic={this.challengesList[i].pic}
-          name={this.challengesList[i].name} />
+          pic={this.props.challenges.list[i].imageURL}
+          name={this.props.challenges.list[i].title} />
       )
     }
     return itemsList
   }
 
   action = (data) => {
-    console.log(data);
     Actions.SpecificChallenge({title: 'Ice Bucket Challenge'})
   }
 
@@ -134,12 +104,13 @@ class ChallengesScreen extends React.Component {
   }.bind(this);
 
   render() {
+    if (this.props.challenges.list.length === 0) return <View></View>;
     return (
       <TouchableOpacity onPress={this.action}>
         <ScrollView>
           <View style={styles.container}>
             <View style={styles.grid}>
-              <Item style={styles.gridFirst} pic={this.challengesList[0].pic} name={this.challengesList[0].name} />
+              <Item style={styles.gridFirst} pic={this.props.challenges.list[0].imageURL} name={this.props.challenges.list[0].title} />
               {this.items()}
             </View>
           </View>
@@ -153,6 +124,7 @@ class ChallengesScreen extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   setTaggableFriends: (list) => dispatch(setTaggableFriends(list)),
+  challengesList: () => dispatch(challengesList()),
 });
 
-export default connect(({routes, login})=>({routes, login}), mapDispatchToProps)(ChallengesScreen);
+export default connect(({routes, challenges})=>({routes, challenges}), mapDispatchToProps)(ChallengesScreen);
