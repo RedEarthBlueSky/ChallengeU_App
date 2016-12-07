@@ -31,16 +31,18 @@ const styles = StyleSheet.create({
   },
   gridItem: {
     flex: 1,
+    margin: 300
+  },
+  gridSize: {
     width: 183,
-    height: 178,
-    marginLeft: 6,
-    margin: 3
+    height: 183,
   },
   gridFirst: {
-    flex: 1,
-    width: 370,
-    height: 360,
-    margin: 3
+    width: Dimensions.get("window").width - 4,
+    height: 370,
+    marginLeft: 2,
+    marginRight:2,
+    margin: 1
   }
 });
 
@@ -61,9 +63,10 @@ class ChallengesScreen extends React.Component {
     for (let i = 1; i < this.props.challenges.list.length; i++) {
       itemsList.push(
         <TouchableOpacity key={i} 
+          style={styles.gridFirst} 
           onPress={() => this.action(this.props.challenges.list[i].title, this.props.challenges.list[i]._id)}>
           <Item 
-            style={styles.gridItem} 
+            style={[styles.gridItem, styles.gridFirst]}
             pic={this.props.challenges.list[i].imageURL} 
             name={this.props.challenges.list[i].title} />
         </TouchableOpacity>
@@ -84,7 +87,10 @@ class ChallengesScreen extends React.Component {
           <View style={styles.container}>
             <View style={styles.grid}>
               <TouchableOpacity style={styles.gridFirst} onPress={() => this.action(this.props.challenges.list[0].title, this.props.challenges.list[0]._id)}>
-                <Item style={styles.gridFirst} pic={this.props.challenges.list[0].imageURL} name={this.props.challenges.list[0].title} />
+                <Item 
+                  style={[styles.gridItem, styles.gridFirst]}
+                  pic={this.props.challenges.list[0].imageURL} 
+                  name={this.props.challenges.list[0].title} />
               </TouchableOpacity>
               {this.items()}
             </View>
