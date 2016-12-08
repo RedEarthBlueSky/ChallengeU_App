@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
+    fontFamily: 'patuaone',  
     marginLeft: 12,
     fontSize: 16,
   }

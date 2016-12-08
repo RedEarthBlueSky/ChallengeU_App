@@ -63,7 +63,7 @@ class Loader extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          Getting ready for challenge...
+          Get ready for the challenges...
         </Text>
         <Spinner
           style={styles.spinner}
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     marginBottom: 50
   },
   text: {
+    fontFamily: 'patuaone',
     color: "white",
     fontSize: 25,
     marginBottom: 10

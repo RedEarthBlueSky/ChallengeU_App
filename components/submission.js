@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-
+import VideoComponent from 'react-native-video';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,11 +12,13 @@ const styles = StyleSheet.create({
     paddingTop: 17
   },
   text1: {
+    fontFamily: 'patuaone',
     marginTop:3,
     marginLeft: 25,
     fontSize: 16
   },
   text2: {
+    fontFamily: 'patuaone',
     marginLeft: 12,
     fontSize: 18,
     fontWeight: 'bold'
@@ -34,7 +36,7 @@ const Submission = (props) => {
 
   renderFriends = function () {
     return props.challengedUsers.map(function(user) {
-      let actualState = user.status === 'Done' ? "has took it" : "haven't took it yet";
+      let actualState = user.status === 'Done' ? "has taken it" : "hasn't taken it yet";
       return (
         <View style={styles.information} key={user._id}>
           <Image source={{ uri: user.picture}} style={personalized(user.status)} />

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
@@ -43,6 +44,7 @@ public class MainApplication extends Application implements ReactApplication {
       mCallbackManager = new CallbackManager.Factory().create(); // Added by Ruben
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new LinearGradientPackage(),
         new VectorIconsPackage(),
         new ReactVideoPackage(),
         new RCTCameraPackage(),
