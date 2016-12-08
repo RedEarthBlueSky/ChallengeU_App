@@ -63,7 +63,7 @@ class Loader extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          Getting ready for challenge...
+          Get ready for the challenges...
         </Text>
         <Spinner
           style={styles.spinner}
