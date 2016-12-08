@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     marginBottom: 50
   },
   text: {
+    fontFamily: 'patuaone',
     color: "white",
     fontSize: 25,
     marginBottom: 10

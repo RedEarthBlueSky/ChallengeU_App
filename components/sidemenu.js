@@ -40,9 +40,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     paddingLeft: 10,
-    backgroundColor: '#1e90ff'
+    backgroundColor: '#045'
   },
   text: {
+    fontFamily: 'patuaone',
     lineHeight: 50,
     fontWeight: 'bold',
     fontSize: 22,

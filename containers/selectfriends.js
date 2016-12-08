@@ -93,6 +93,15 @@ class SelectFriends extends React.Component {
   }
 
   onSearch(query){
+    console.log('friendslist', this.friendsList);
+    console.log('name', friendsList[0].name);
+    const filteredList = friendsList.filter(el => (el.name.indexOf(query) >= 0))
+    
+    this.setState({
+      dataSource: this.ds.cloneWithRows(filteredList),
+      actual: Math.max(3 - numSelected, 0)
+    })
+
     console.log(query);
   }
 
@@ -106,6 +115,7 @@ class SelectFriends extends React.Component {
 
       <View style = {styles.button}>
       <Button
+          color="#045"
           disabled={this.state.actual === 0 ? false : true}
           onPress={this.onButtonPress}
           title="Submit"
@@ -137,6 +147,7 @@ const styles = StyleSheet.create({
     marginTop: 70
   },
   button: {
+    marginLeft: 50,
     paddingTop: 20,
     paddingLeft: 20,
     height: 60,

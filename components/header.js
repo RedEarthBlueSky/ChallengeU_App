@@ -25,7 +25,7 @@ const Header = (props) => {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Search..."
+        placeholder="Filter..."
         onChangeText={(text) => props.onSearch(text)}
       />
     </View>

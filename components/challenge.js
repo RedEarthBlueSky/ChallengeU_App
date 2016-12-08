@@ -7,12 +7,15 @@ const styles = StyleSheet.create({
   container: {
     padding: 12,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 15
   },
   information: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginBottom: 10
   },
   text: {
+    fontFamily: 'patuaone',
     marginLeft: 12,
     fontSize: 16,
     lineHeight: 30

@@ -25,8 +25,13 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 30
+    marginTop: 30,
+    marginBottom: 40
+  },
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E'
   }
 });
 
@@ -50,18 +55,22 @@ class SpecificChallenge extends React.Component {
     if (this.props.submissions.length > 0) {
       return (
         <View style={styles.container}>
+
           <Text style={{fontSize: 17, fontWeight: 'bold', marginTop: 8}}> {this.props.submissions[0].challengeTypeId.description} </Text>
           <View style={styles.header}>
-            <View style={{height:60, width:120}}>
+            <View style={{height:70, width:120}}>
               <Button
+              color="#045"
               onPress={() => action(this.props.submissions[0].challengeTypeId._id)}
               title="Take it!"
               />
             </View>
           </View>
+
           <ListView
             dataSource={this.state.dataSource}
             renderRow={(data) => <Challenge {...data} />}
+            renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
           />
         </View>
       );
